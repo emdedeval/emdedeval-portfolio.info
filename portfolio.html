@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unveiling the Essence Online</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>Valentin D Mengue Ebengue</h1>
+      <h2>AWS Cloud/DevOps Engineer</h2>
+    </header>
+    <main class="main">
+      <section class="section">
+        <h2>About Me</h2>
+        <p>With over a decade dedicated to shaping excellence in Cloud and DevOps engineering, I thrive on crafting inventive, user-centric software solutions that challenge the norm. My role extends beyond being a team player; I'm a symphony conductor, orchestrating communication and collaboration into a harmonious composition of success.</p>
+      </section>
+      <section class="section">
+        <h2>My Resume(Curriculum vitae)</h2>
+        <a href="https://s3.amazonaws.com/emdedeval-portfolio.info/curriculum+vitae-1.2.1.docx">Download Resume</a>
+      </section>
+      <section class="section">
+        <h2>My Portfolio</h2>
+        <a href="https://s3.amazonaws.com/emdedeval-portfolio.info/my_portfolio.html">Explore Portfolio</a>
+      </section>
+      <section class="section fun-facts">
+        <h2>Fun Facts</h2>
+        <ul id="fun-facts-list">
+          <li>Did you know? The first computer bug was an actual bug (a moth)!</li>
+          <li>I'm a huge fan of sci-fi movies. My favorite is Blade Runner.</li>
+          <li>I once solved a Rubik's Cube in under 2 minutes!</li>
+        </ul>
+      </section>
+      <section class="section hobbies">
+        <h2>My Hobbies</h2>
+        <p>When I'm not coding, you can find me:</p>
+        <ul>
+          <li>Hiking in the mountains with " NSŌ-FA CLUB " friends</li>
+          <li>Playing the guitar</li>
+          <li>Cooking exotic dishes( Okok )</li>
+        </ul>
+      </section>
+      <div class="flags">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Flag_of_Cameroon.svg" alt="Cameroon Flag" class="flag">
+        <img src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg" alt="USA Flag" class="flag">
+      </div>
+      <div class="time" id="current-time"></div>
+      <div class="quote" id="quote"></div>
+    </main>
+    <footer class="footer">
+      <p>&copy; 2024 Valentin Desire Mengue Ebengue</p>
+    </footer>
+  </div>
+
+  <script>
+    function getFunnyTime() {
+      const now = new Date();
+      const hours = now.getHours();
+      const minutes = now.getMinutes().toString().padStart(2, '0');
+      const seconds = now.getSeconds().toString().padStart(2, '0');
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      const displayHours = hours % 12 || 12;
+      const daysOfWeek = ["Sunday Funday", "Moody Monday", "Taco Tuesday", "Wacky Wednesday", "Thirsty Thursday", "Freaky Friday", "Silly Saturday"];
+      const dayName = daysOfWeek[now.getDay()];
+      const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      const month = monthNames[now.getMonth()];
+      const day = now.getDate();
+      const year = now.getFullYear();
+      return `It's ${displayHours}:${minutes}:${seconds} ${ampm} on ${dayName}, ${month} ${day}, ${year}`;
+    }
+
+    function updateTime() {
+      const timeElement = document.getElementById('current-time');
+      timeElement.textContent = getFunnyTime();
+    }
+
+    const quotes = [
+      "I'm not arguing, I'm just explaining why I'm right.",
+      "I'm on a seafood diet. I see food and I eat it.",
+      "I told my computer I needed a break, and now it won't stop sending me Kit-Kats.",
+      "Why don’t scientists trust atoms? Because they make up everything!",
+      "I'm reading a book about anti-gravity. It's impossible to put down.",
+      "Je pense, donc je suis. - René Descartes",
+      "Le seul vrai voyage, ce ne serait pas d'aller vers de nouveaux paysages, mais d'avoir d'autres yeux. - Marcel Proust",
+      "La vie, c'est comme une bicyclette, il faut avancer pour ne pas perdre l'équilibre. - Albert Einstein",
+      "L'espoir est un devoir, pas un luxe. - Georges Bernanos",
+      "Quand on refuse on dit non. - Mongo Beti",
+      "La France m'a pourri. - Mongo Beti",
+      "L'Afrique est en train de mourir. - Mongo Beti",
+      "L'aventure ambiguë. - Cheikh Hamidou Kane",
+      "Les morts ne sont pas morts. - Cheikh Hamidou Kane",
+      "Là où l'Afrique subsaharienne souffre le plus, c'est dans le domaine de la culture. - Mongo Beti"
+    ];
+
+    const funFacts = [
+      "Did you know? The first computer bug was an actual bug (a moth)!",
+      "I'm a huge fan of movies. My favorite is One Day in Africa.",
+      "I once solved a Rubik's Cube in under 2 minutes!"
+    ];
+
+    function getRandomQuote() {
+      const randomIndex = Math.floor(Math.random() * quotes.length);
+      return quotes[randomIndex];
+    }
+
+    function updateQuote() {
+      const quoteElement = document.getElementById('quote');
+      quoteElement.textContent = getRandomQuote();
+    }
+
+    let currentFactIndex = 0;
+    function updateFunFacts() {
+      const funFactsList = document.getElementById('fun-facts-list');
+      funFactsList.innerHTML = `<li>${funFacts[currentFactIndex]}</li>`;
+      currentFactIndex = (currentFactIndex + 1) % funFacts.length;
+    }
+
+    setInterval(updateTime, 1000);
+    setInterval(updateQuote, 10000); // Change quote every 10 seconds
+    setInterval(updateFunFacts, 5000); // Change fun fact every 5 seconds
+    updateTime();
+    updateQuote();
+    updateFunFacts();
+  </script>
+</body>
+</html>

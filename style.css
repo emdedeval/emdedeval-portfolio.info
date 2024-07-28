@@ -1,0 +1,153 @@
+body {
+  background: url("https://s3.amazonaws.com/emdedeval-portfolio.info/dede.jpg") no-repeat center center/cover;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  color: #3c3a3a;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 800px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #ff5722;
+  text-shadow: 2px 2px 5px #000;
+  font-size: 36px;
+}
+
+.header h2 {
+  margin: 0;
+  color: #ffeb3b;
+  text-shadow: 1px 1px 3px #000;
+  font-size: 28px;
+}
+
+.main {
+  width: 100%;
+}
+
+.section {
+  margin-bottom: 30px;
+}
+
+.section h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: #4caf50;
+}
+
+.section p,
+.section a,
+.section ul {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.section a {
+  color: #2196f3;
+  text-decoration: none;
+  border-bottom: 2px solid #2196f3;
+  transition: color 0.3s, border-color 0.3s;
+}
+
+.section a:hover {
+  color: #ff5722;
+  border-color: #ff5722;
+}
+
+.flags {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.flag {
+  width: 60px;
+  height: auto;
+  margin: 0 10px;
+  border: 2px solid #000;
+  border-radius: 5px;
+}
+
+.time {
+  font-size: 24px;
+  margin-top: 20px;
+  color: #007bff;
+  font-weight: bold;
+  border: 2px solid #007bff;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.9);
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.quote {
+  font-size: 20px;
+  color: #ff9800;
+  margin-top: 20px;
+  font-style: italic;
+  padding: 10px;
+  border: 2px dashed #ff9800;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+  border-radius: 0 0 15px 15px;
+  margin-top: 20px;
+}
+
+@media (max-width: 600px) {
+  .header h1 {
+      font-size: 28px;
+  }
+
+  .header h2 {
+      font-size: 22px;
+  }
+
+  .section h2 {
+      font-size: 22px;
+  }
+
+  .section p,
+  .section a,
+  .section ul {
+      font-size: 16px;
+  }
+
+  .time {
+      font-size: 18px;
+  }
+
+  .quote {
+      font-size: 18px;
+  }
+}
