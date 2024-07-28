@@ -68,7 +68,7 @@
       const month = monthNames[now.getMonth()];
       const day = now.getDate();
       const year = now.getFullYear();
-      return It's ${displayHours}:${minutes}:${seconds} ${ampm} on ${dayName}, ${month} ${day}, ${year};
+      return `It's ${displayHours}:${minutes}:${seconds} ${ampm} on ${dayName}, ${month} ${day}, ${year}`;
     }
 
     function updateTime() {
@@ -113,7 +113,7 @@
     let currentFactIndex = 0;
     function updateFunFacts() {
       const funFactsList = document.getElementById('fun-facts-list');
-      funFactsList.innerHTML = <li>${funFacts[currentFactIndex]}</li>;
+      funFactsList.innerHTML = `<li>${funFacts[currentFactIndex]}</li>`;
       currentFactIndex = (currentFactIndex + 1) % funFacts.length;
     }
 
