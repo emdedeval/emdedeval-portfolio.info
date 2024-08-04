@@ -18,6 +18,14 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Install dependencies
+        run: npm install
+
+      - name: Test for vulnerabilities with Snyk
+        run: snyk test
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}  # Ensure you add your Snyk token to GitHub secrets
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2  # Updated to the latest version
         with:
