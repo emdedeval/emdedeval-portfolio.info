@@ -19,8 +19,13 @@ jobs:
           node-version: '20'
 
       # Install Snyk CLI
+<<<<<<< HEAD
       # - name: Install Snyk CLI
       #   run: npm install -g snyk
+=======
+      - name: Install Snyk CLI
+        run: npm install -g snyk
+>>>>>>> a0436ad (...)
 
       # - name: Test for vulnerabilities with Snyk
       #   run: snyk test
