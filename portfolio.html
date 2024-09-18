@@ -6,21 +6,31 @@
   <title>Unveiling the Symphony of Innovation</title>
   <link rel="stylesheet" href="style.css">
   <style>
+    /* Container styling for better layout on all screens */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
     .flags {
       display: flex;
       justify-content: center;
       gap: 15px;
       animation: wave 2s infinite alternate; /* Adds a subtle waving effect */
     }
+
     @keyframes wave {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(2deg); }
     }
+
     .flag {
       width: 60px; /* Enhanced size for emphasis */
       height: auto;
       filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.5)); /* Adds some depth to flags */
     }
+
     .header {
       text-align: center;
       background: linear-gradient(45deg, #3a6186, #89253e);
@@ -28,10 +38,12 @@
       color: #fff;
       text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
     }
+
     .header h1 {
       font-size: 2.5em;
       letter-spacing: 3px;
     }
+
     .main {
       padding: 20px;
       font-family: 'Georgia', serif;
@@ -39,6 +51,7 @@
       border-radius: 15px;
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     }
+
     .section {
       margin-bottom: 30px;
       padding: 20px;
@@ -46,6 +59,7 @@
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
+
     .fun-facts li, .hobbies li {
       font-size: 1.2em;
       line-height: 1.6;
@@ -53,16 +67,41 @@
       margin-bottom: 10px;
       animation: funSlide 3s ease-in-out infinite alternate;
     }
+
     @keyframes funSlide {
       0% { transform: translateX(0); }
       100% { transform: translateX(10px); }
     }
+
     .footer {
       text-align: center;
       padding: 10px;
       background: #89253e;
       color: white;
       font-style: italic;
+    }
+
+    /* Media query for responsiveness on smaller screens */
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 2em;
+      }
+
+      .main {
+        padding: 10px;
+      }
+
+      .section {
+        padding: 15px;
+      }
+
+      .flags {
+        flex-direction: column;
+      }
+
+      .fun-facts li, .hobbies li {
+        font-size: 1em;
+      }
     }
   </style>
 </head>
