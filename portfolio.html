@@ -3,203 +3,225 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Unveiling the Symphony of Innovation</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Valentin's Portfolio</title>
   <style>
-    /* Container styling for better layout on all screens */
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      color: #3c3a3a;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f4; /* Background color without image */
+    }
+
     .container {
-      max-width: 1200px;
-      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(255, 255, 255, 0.8);
+      text-align: center;
       padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 800px;
+    }
+
+    .header h1 {
+      margin: 0;
+      color: #ff5722;
+      text-shadow: 2px 2px 5px #000;
+      font-size: 36px;
+    }
+
+    .header h2 {
+      margin: 0;
+      color: #ffeb3b;
+      text-shadow: 1px 1px 3px #000;
+      font-size: 28px;
+    }
+
+    .main {
+      width: 100%;
+    }
+
+    .section {
+      margin-bottom: 30px;
+    }
+
+    .section h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+      color: #4caf50;
+    }
+
+    .section p,
+    .section a,
+    .section ul {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .section a {
+      color: #2196f3;
+      text-decoration: none;
+      border-bottom: 2px solid #2196f3;
+      transition: color 0.3s, border-color 0.3s;
+    }
+
+    .section a:hover {
+      color: #ff5722;
+      border-color: #ff5722;
     }
 
     .flags {
       display: flex;
       justify-content: center;
-      gap: 15px;
-      animation: wave 2s infinite alternate; /* Adds a subtle waving effect */
-    }
-
-    @keyframes wave {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(2deg); }
+      margin: 20px 0;
     }
 
     .flag {
-      width: 60px; /* Enhanced size for emphasis */
+      width: 60px;
       height: auto;
-      filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.5)); /* Adds some depth to flags */
+      margin: 0 10px;
+      border: 2px solid #000;
+      border-radius: 5px;
     }
 
-    .header {
-      text-align: center;
-      background: linear-gradient(45deg, #3a6186, #89253e);
-      padding: 20px;
-      color: #fff;
-      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-    }
-
-    .header h1 {
-      font-size: 2.5em;
-      letter-spacing: 3px;
-    }
-
-    .main {
-      padding: 20px;
-      font-family: 'Georgia', serif;
-      background: #f4f4f9;
-      border-radius: 15px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    }
-
-    .section {
-      margin-bottom: 30px;
-      padding: 20px;
-      background: #ffffff;
+    .time {
+      font-size: 24px;
+      margin-top: 20px;
+      color: #007bff;
+      font-weight: bold;
+      border: 2px solid #007bff;
+      padding: 10px;
       border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      background-color: rgba(255, 255, 255, 0.9);
+      animation: pulse 1s infinite;
     }
 
-    .fun-facts li, .hobbies li {
-      font-size: 1.2em;
-      line-height: 1.6;
-      color: #333;
-      margin-bottom: 10px;
-      animation: funSlide 3s ease-in-out infinite alternate;
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
     }
 
-    @keyframes funSlide {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(10px); }
+    .quote {
+      font-size: 20px;
+      color: #ff9800;
+      margin-top: 20px;
+      font-style: italic;
+      padding: 10px;
+      border: 2px dashed #ff9800;
+      border-radius: 10px;
+      background-color: rgba(255, 255, 255, 0.8);
     }
 
     .footer {
-      text-align: center;
+      background-color: #333;
+      color: #fff;
       padding: 10px;
-      background: #89253e;
-      color: white;
-      font-style: italic;
+      width: 100%;
+      text-align: center;
+      border-radius: 0 0 15px 15px;
+      margin-top: 20px;
     }
 
-    /* Media query for responsiveness on smaller screens */
-    @media (max-width: 768px) {
+    @media (max-width: 600px) {
       .header h1 {
-        font-size: 2em;
+        font-size: 28px;
       }
 
-      .main {
-        padding: 10px;
+      .header h2 {
+        font-size: 22px;
       }
 
-      .section {
-        padding: 15px;
+      .section h2 {
+        font-size: 22px;
       }
 
-      .flags {
-        flex-direction: column;
+      .section p,
+      .section a,
+      .section ul {
+        font-size: 16px;
       }
 
-      .fun-facts li, .hobbies li {
-        font-size: 1em;
+      .time {
+        font-size: 18px;
+      }
+
+      .quote {
+        font-size: 18px;
       }
     }
   </style>
 </head>
 <body>
+
   <div class="container">
-    <header class="header">
+    <div class="header">
       <h1>Valentin D. Mengue Ebengue</h1>
-      <h2>Architect of Cloud Solutions & DevOps Maestro</h2>
-    </header>
-    <main class="main">
-      <section class="section">
+      <h2>Cloud Architect & DevOps Expert</h2>
+    </div>
+    
+    <div class="main">
+      <div class="section">
         <h2>The Genesis of My Journey</h2>
-        <p>In a career spanning over a decade, I've danced between the clouds and code, crafting avant-garde software solutions that merge creativity and functionality. Whether working solo or leading a team, I orchestrate seamless communication, turning diverse expertise into symphonies of innovation. My role? Not just to contribute, but to lead with brilliance, shaping success from the ordinary.</p>
-      </section>
-      <section class="section">
-        <h2>The Grand Résumé</h2>
-        <a href="https://s3.amazonaws.com/emdedeval-portfolio.info/C.V.ResumeV.3.docx">Step into My World</a>
-      </section>
-      <section class="section">
+        <p>In over a decade of experience, I’ve combined cloud expertise and DevOps mastery to create elegant and efficient solutions. My journey in tech is one of constant learning, innovation, and transformation.</p>
+      </div>
+      
+      <div class="section">
         <h2>The Portfolio Showcase</h2>
-        <a href="https://s3.amazonaws.com/emdedeval-portfolio.info/my_portfolio.html">Marvel at My Creations</a>
-      </section>
-      <section class="section fun-facts">
-        <h2>Did You Know?</h2>
-        <ul id="fun-facts-list">
-          <li>I once debugged code while hiking, and the solution came with the mountain breeze!</li>
-          <li>I've been known to binge-watch sci-fi series for "inspiration". My top pick? Blade Runner.</li>
-          <li>My Rubik's Cube completion time is a record-breaking under 2 minutes!</li>
-        </ul>
-      </section>
-      <section class="section hobbies">
-        <h2>Where Passion Meets Leisure</h2>
-        <p>When my keyboard rests, my spirit soars in these endeavors:</p>
-        <ul>
-          <li>Embarking on adrenaline-packed mountain hikes with "NSŌ-FA CLUB"</li>
-          <li>Composing melodies on my guitar, a fusion of sound and code</li>
-          <li>Experimenting with exotic cuisine, especially my signature dish, "Okok"</li>
-        </ul>
-      </section>
+        <p><a href="https://s3.amazonaws.com/emdedeval-portfolio.info/my_portfolio.html">View My Work</a></p>
+      </div>
+      
       <div class="flags">
         <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Flag_of_Cameroon.svg" alt="Cameroon Flag" class="flag">
         <img src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg" alt="USA Flag" class="flag">
       </div>
+      
       <div class="time" id="current-time"></div>
       <div class="quote" id="quote"></div>
-    </main>
-    <footer class="footer">
-      <p>&copy; 2024 Valentin Desire Mengue Ebengue — Crafting Innovation, One Line of Code at a Time</p>
-    </footer>
+    </div>
+
+    <div class="footer">
+      <p>&copy; 2024 Valentin D. Mengue Ebengue - Crafting Innovation, One Line of Code at a Time</p>
+    </div>
   </div>
 
   <script>
-    function getWhimsicalTime() {
-      const now = new Date();
-      const hours = now.getHours();
-      const minutes = now.getMinutes().toString().padStart(2, '0');
-      const seconds = now.getSeconds().toString().padStart(2, '0');
-      const ampm = hours >= 12 ? 'PM' : 'AM';
-      const displayHours = hours % 12 || 12;
-      const daysOfWeek = ["Sunny Sunday", "Mighty Monday", "Tantalizing Tuesday", "Wacky Wednesday", "Thoughtful Thursday", "Fantastic Friday", "Sensational Saturday"];
-      const dayName = daysOfWeek[now.getDay()];
-      const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-      const month = monthNames[now.getMonth()];
-      const day = now.getDate();
-      const year = now.getFullYear();
-      return `Right now, it's ${displayHours}:${minutes}:${seconds} ${ampm} on ${dayName}, ${month} ${day}, ${year}`;
-    }
-
+    // Time and date script
     function updateTime() {
+      const now = new Date();
       const timeElement = document.getElementById('current-time');
-      timeElement.textContent = getWhimsicalTime();
+      timeElement.textContent = `Right now, it's ${now.toLocaleTimeString()}`;
     }
 
+    // Quote rotation script
     const quotes = [
-      "I'm not arguing, I'm just passionately clarifying my brilliance.",
-      "I follow a seafood diet: I see food, I innovate.",
-      "My computer knows me so well, it even sends Kit-Kats when I need a break!",
-      "Atoms, they make up everything... including my witty code.",
-      "Reading a book on anti-gravity? I simply can't put it down.",
-      "La vie est un code, et je suis le programmeur. - Valentin",
-      "Quand on code, on réinvente l'univers. - Valentin",
-      "L'innovation ne dort jamais, tout comme moi pendant une deadline. - Valentin"
+      "La vie est un code, et je suis le programmeur.",
+      "Quand on code, on réinvente l'univers.",
+      "L'innovation ne dort jamais, tout comme moi pendant une deadline.",
+      "I follow a seafood diet: I see food, I innovate."
     ];
 
-    function getRandomQuote() {
-      const randomIndex = Math.floor(Math.random() * quotes.length);
-      return quotes[randomIndex];
-    }
-
     function updateQuote() {
+      const randomIndex = Math.floor(Math.random() * quotes.length);
       const quoteElement = document.getElementById('quote');
-      quoteElement.textContent = getRandomQuote();
+      quoteElement.textContent = quotes[randomIndex];
     }
 
-    setInterval(updateTime, 1000);
-    setInterval(updateQuote, 10000);
+    setInterval(updateTime, 1000);  // Update the time every second
+    setInterval(updateQuote, 10000);  // Update the quote every 10 seconds
+
+    // Initialize
     updateTime();
     updateQuote();
   </script>
+
 </body>
 </html>
