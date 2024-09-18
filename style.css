@@ -1,49 +1,47 @@
 body {
-  background: url("https://s3.amazonaws.com/emdedeval-portfolio.info/dede.jpg") no-repeat center center/cover;
-  font-family: 'Comic Sans MS', cursive, sans-serif;
-  color: #3c3a3a;
   margin: 0;
   padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f0f0;
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(255, 255, 255, 0.8);
-  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-  width: 90%;
-  max-width: 800px;
+}
+
+.header {
+  text-align: center;
+  background: linear-gradient(45deg, #3a6186, #89253e);
+  padding: 40px;
+  color: #fff;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .header h1 {
-  margin: 0;
-  color: #ff5722;
-  text-shadow: 2px 2px 5px #000;
-  font-size: 36px;
+  font-size: 2.5em;
+  letter-spacing: 3px;
 }
 
 .header h2 {
-  margin: 0;
-  color: #ffeb3b;
-  text-shadow: 1px 1px 3px #000;
-  font-size: 28px;
+  font-size: 1.5em;
 }
 
 .main {
-  width: 100%;
+  padding: 20px;
+  font-family: 'Georgia', serif;
+  background: #f4f4f9;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .section {
   margin-bottom: 30px;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .section h2 {
@@ -52,9 +50,7 @@ body {
   color: #4caf50;
 }
 
-.section p,
-.section a,
-.section ul {
+.section p, .section a, .section ul {
   font-size: 18px;
   line-height: 1.6;
 }
@@ -126,28 +122,26 @@ body {
 
 @media (max-width: 600px) {
   .header h1 {
-      font-size: 28px;
+    font-size: 1.8em;
   }
 
   .header h2 {
-      font-size: 22px;
+    font-size: 1.2em;
   }
 
   .section h2 {
-      font-size: 22px;
+    font-size: 22px;
   }
 
-  .section p,
-  .section a,
-  .section ul {
-      font-size: 16px;
+  .section p, .section a, .section ul {
+    font-size: 16px;
   }
 
   .time {
-      font-size: 18px;
+    font-size: 18px;
   }
 
   .quote {
-      font-size: 18px;
+    font-size: 18px;
   }
-} 
+}
