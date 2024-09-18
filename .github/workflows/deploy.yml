@@ -11,43 +11,38 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3  # Updated to the latest version
+        uses: actions/checkout@v3  # Using the latest version of the checkout action
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: '20'  # Set to Node.js version 20
 
-      # Install Snyk CLI
-<<<<<<< HEAD
-      # - name: Install Snyk CLI
-      #   run: npm install -g snyk
-=======
       - name: Install Snyk CLI
-        run: npm install -g snyk
->>>>>>> a0436ad (...)
+        run: npm install -g snyk  # Install Snyk globally to check for vulnerabilities
 
+      # Uncomment this step to run Snyk vulnerability tests (make sure SNYK_TOKEN is added in your GitHub secrets)
       # - name: Test for vulnerabilities with Snyk
       #   run: snyk test
       #   env:
-      #     SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}  # Ensure you add your Snyk token to GitHub secrets
+      #     SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2  # Updated to the latest version
+        uses: aws-actions/configure-aws-credentials@v2  # Updated to use v2
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}  # Set AWS credentials from secrets
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
+          aws-region: ${{ secrets.AWS_REGION }}  # Set AWS region from secrets
 
       - name: Deploy to S3
         run: |
-          aws s3 sync . s3://${{ secrets.AWS_S3_BUCKET }} --exclude '.git/*' --delete
+          aws s3 sync . s3://${{ secrets.AWS_S3_BUCKET }} --exclude '.git/*' --delete  # Sync files to S3 and exclude Git files
 
       - name: Invalidate CloudFront Cache
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main'  # Invalidate cache only when pushing to main
         run: |
           aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ${{ secrets.AWS_REGION }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}  # Set AWS access key
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}  # Set AWS secret key
+          AWS_REGION: ${{ secrets.AWS_REGION }}  # Set AWS region
