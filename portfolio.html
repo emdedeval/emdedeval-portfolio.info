@@ -3,54 +3,103 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Unveiling the Essence Online</title>
+  <title>Unveiling the Symphony of Innovation</title>
   <link rel="stylesheet" href="style.css">
   <style>
     .flags {
       display: flex;
       justify-content: center;
-      gap: 10px; /* Adds some space between the flags */
+      gap: 15px;
+      animation: wave 2s infinite alternate; /* Adds a subtle waving effect */
+    }
+    @keyframes wave {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(2deg); }
     }
     .flag {
-      width: 50px; /* Set the width you prefer */
-      height: auto; /* Maintain aspect ratio */
+      width: 60px; /* Enhanced size for emphasis */
+      height: auto;
+      filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.5)); /* Adds some depth to flags */
+    }
+    .header {
+      text-align: center;
+      background: linear-gradient(45deg, #3a6186, #89253e);
+      padding: 20px;
+      color: #fff;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    }
+    .header h1 {
+      font-size: 2.5em;
+      letter-spacing: 3px;
+    }
+    .main {
+      padding: 20px;
+      font-family: 'Georgia', serif;
+      background: #f4f4f9;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    .section {
+      margin-bottom: 30px;
+      padding: 20px;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .fun-facts li, .hobbies li {
+      font-size: 1.2em;
+      line-height: 1.6;
+      color: #333;
+      margin-bottom: 10px;
+      animation: funSlide 3s ease-in-out infinite alternate;
+    }
+    @keyframes funSlide {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(10px); }
+    }
+    .footer {
+      text-align: center;
+      padding: 10px;
+      background: #89253e;
+      color: white;
+      font-style: italic;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <header class="header">
-      <h1>Valentin D Mengue Ebengue</h1>
-      <h2>AWS Cloud/DevOps Engineer</h2>
+      <h1>Valentin D. Mengue Ebengue</h1>
+      <h2>Architect of Cloud Solutions & DevOps Maestro</h2>
     </header>
     <main class="main">
       <section class="section">
-        <h2>About Me</h2>
-        <p>With over a decade dedicated to shaping excellence in Cloud and DevOps engineering, I thrive on crafting inventive, user-centric software solutions that challenge the norm. My role extends beyond being a team player; I'm a symphony conductor, orchestrating communication and collaboration into a harmonious composition of success.</p>
+        <h2>The Genesis of My Journey</h2>
+        <p>In a career spanning over a decade, I've danced between the clouds and code, crafting avant-garde software solutions that merge creativity and functionality. Whether working solo or leading a team, I orchestrate seamless communication, turning diverse expertise into symphonies of innovation. My role? Not just to contribute, but to lead with brilliance, shaping success from the ordinary.</p>
       </section>
       <section class="section">
-        <h2>My Resume (Curriculum Vitae)</h2>
-        <a href="https://s3.amazonaws.com/emdedeval-portfolio.info/curriculum+vitae-1.2.1.docx">Download Resume</a>
+        <h2>The Grand Résumé</h2>
+        <a href="https://s3.amazonaws.com/emdedeval-portfolio.info/C.V.ResumeV.3.docx">Step into My World</a>
       </section>
       <section class="section">
-        <h2>My Portfolio</h2>
-        <a href="https://s3.amazonaws.com/emdedeval-portfolio.info/my_portfolio.html">Explore Portfolio</a>
+        <h2>The Portfolio Showcase</h2>
+        <a href="https://s3.amazonaws.com/emdedeval-portfolio.info/my_portfolio.html">Marvel at My Creations</a>
       </section>
       <section class="section fun-facts">
-        <h2>Fun Facts</h2>
+        <h2>Did You Know?</h2>
         <ul id="fun-facts-list">
-          <li>Did you know? The first computer bug was an actual bug (a moth)!</li>
-          <li>I'm a huge fan of sci-fi movies. My favorite is Blade Runner.</li>
-          <li>I once solved a Rubik's Cube in under 2 minutes!</li>
+          <li>I once debugged code while hiking, and the solution came with the mountain breeze!</li>
+          <li>I've been known to binge-watch sci-fi series for "inspiration". My top pick? Blade Runner.</li>
+          <li>My Rubik's Cube completion time is a record-breaking under 2 minutes!</li>
         </ul>
       </section>
       <section class="section hobbies">
-        <h2>My Hobbies</h2>
-        <p>When I'm not coding, you can find me:</p>
+        <h2>Where Passion Meets Leisure</h2>
+        <p>When my keyboard rests, my spirit soars in these endeavors:</p>
         <ul>
-          <li>Hiking in the mountains with "NSŌ-FA CLUB" friends</li>
-          <li>Playing the guitar</li>
-          <li>Cooking exotic dishes (Okok)</li>
+          <li>Embarking on adrenaline-packed mountain hikes with "NSŌ-FA CLUB"</li>
+          <li>Composing melodies on my guitar, a fusion of sound and code</li>
+          <li>Experimenting with exotic cuisine, especially my signature dish, "Okok"</li>
         </ul>
       </section>
       <div class="flags">
@@ -61,54 +110,41 @@
       <div class="quote" id="quote"></div>
     </main>
     <footer class="footer">
-      <p>&copy; 2024 Valentin Desire Mengue Ebengue</p>
+      <p>&copy; 2024 Valentin Desire Mengue Ebengue — Crafting Innovation, One Line of Code at a Time</p>
     </footer>
   </div>
 
   <script>
-    function getFunnyTime() {
+    function getWhimsicalTime() {
       const now = new Date();
       const hours = now.getHours();
       const minutes = now.getMinutes().toString().padStart(2, '0');
       const seconds = now.getSeconds().toString().padStart(2, '0');
       const ampm = hours >= 12 ? 'PM' : 'AM';
       const displayHours = hours % 12 || 12;
-      const daysOfWeek = ["Sunday Funday", "Moody Monday", "Taco Tuesday", "Wacky Wednesday", "Thirsty Thursday", "Freaky Friday", "Silly Saturday"];
+      const daysOfWeek = ["Sunny Sunday", "Mighty Monday", "Tantalizing Tuesday", "Wacky Wednesday", "Thoughtful Thursday", "Fantastic Friday", "Sensational Saturday"];
       const dayName = daysOfWeek[now.getDay()];
       const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
       const month = monthNames[now.getMonth()];
       const day = now.getDate();
       const year = now.getFullYear();
-      return `It's ${displayHours}:${minutes}:${seconds} ${ampm} on ${dayName}, ${month} ${day}, ${year}`;
+      return `Right now, it's ${displayHours}:${minutes}:${seconds} ${ampm} on ${dayName}, ${month} ${day}, ${year}`;
     }
 
     function updateTime() {
       const timeElement = document.getElementById('current-time');
-      timeElement.textContent = getFunnyTime();
+      timeElement.textContent = getWhimsicalTime();
     }
 
     const quotes = [
-      "I'm not arguing, I'm just explaining why I'm right.",
-      "I'm on a seafood diet. I see food and I eat it.",
-      "I told my computer I needed a break, and now it won't stop sending me Kit-Kats.",
-      "Why don’t scientists trust atoms? Because they make up everything!",
-      "I'm reading a book about anti-gravity. It's impossible to put down.",
-      "Je pense, donc je suis. - René Descartes",
-      "Le seul vrai voyage, ce ne serait pas d'aller vers de nouveaux paysages, mais d'avoir d'autres yeux. - Marcel Proust",
-      "La vie, c'est comme une bicyclette, il faut avancer pour ne pas perdre l'équilibre. - Albert Einstein",
-      "L'espoir est un devoir, pas un luxe. - Georges Bernanos",
-      "Quand on refuse on dit non. - Mongo Beti",
-      "La France m'a pourri. - Mongo Beti",
-      "L'Afrique est en train de mourir. - Mongo Beti",
-      "L'aventure ambiguë. - Cheikh Hamidou Kane",
-      "Les morts ne sont pas morts. - Cheikh Hamidou Kane",
-      "Là où l'Afrique subsaharienne souffre le plus, c'est dans le domaine de la culture. - Mongo Beti"
-    ];
-
-    const funFacts = [
-      "Did you know? The first computer bug was an actual bug (a moth)!",
-      "I'm a huge fan of movies. My favorite is One Day in Africa.",
-      "I once solved a Rubik's Cube in under 2 minutes!"
+      "I'm not arguing, I'm just passionately clarifying my brilliance.",
+      "I follow a seafood diet: I see food, I innovate.",
+      "My computer knows me so well, it even sends Kit-Kats when I need a break!",
+      "Atoms, they make up everything... including my witty code.",
+      "Reading a book on anti-gravity? I simply can't put it down.",
+      "La vie est un code, et je suis le programmeur. - Valentin",
+      "Quand on code, on réinvente l'univers. - Valentin",
+      "L'innovation ne dort jamais, tout comme moi pendant une deadline. - Valentin"
     ];
 
     function getRandomQuote() {
@@ -121,19 +157,10 @@
       quoteElement.textContent = getRandomQuote();
     }
 
-    let currentFactIndex = 0;
-    function updateFunFacts() {
-      const funFactsList = document.getElementById('fun-facts-list');
-      funFactsList.innerHTML = `<li>${funFacts[currentFactIndex]}</li>`;
-      currentFactIndex = (currentFactIndex + 1) % funFacts.length;
-    }
-
     setInterval(updateTime, 1000);
-    setInterval(updateQuote, 10000); // Change quote every 10 seconds
-    setInterval(updateFunFacts, 5000); // Change fun fact every 5 seconds
+    setInterval(updateQuote, 10000);
     updateTime();
     updateQuote();
-    updateFunFacts();
   </script>
 </body>
 </html>
