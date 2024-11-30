@@ -73,6 +73,7 @@
         .then(response => response.json())
         .then(data => {
           const city = data.city;  // Extract city from the response
+          console.log("City fetched: ", city);  // Debugging log
           fetchWeather(city);  // Fetch weather for this city
         })
         .catch(error => {
@@ -84,10 +85,15 @@
     // Function to fetch weather data for a city
     function fetchWeather(city) {
       const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;  // Use metric for Celsius temperature
+      // If you face CORS issues, use a proxy for testing:
+      // const apiUrl = `https://cors-anywhere.herokuapp.com/https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
       
+      console.log("Weather API URL: ", apiUrl); // Debugging log
+
       fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
+          console.log("Weather Data: ", data); // Debugging log
           if (data.cod === 200) {
             const weatherDescription = data.weather[0].description;
             const temperature = data.main.temp;
@@ -103,7 +109,7 @@
               <p>Wind Speed: ${windSpeed} m/s</p>
             `;
           } else {
-            document.getElementById('weather-data').textContent = 'Could not fetch weather data.';
+            document.getElementById('weather-data').textContent = `Could not fetch weather data. Error: ${data.message}`;
           }
         })
         .catch(error => {
@@ -115,6 +121,7 @@
     // Call the function to get the visitor's city and display weather
     getCity();
 
+    // Time display function
     function getWhimsicalTime() {
       const now = new Date();
       const hours = now.getHours();
