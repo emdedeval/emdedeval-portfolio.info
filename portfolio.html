@@ -42,6 +42,15 @@
           <li>Experimenting with exotic cuisine, especially my signature dish, "Okok"</li>
         </ul>
       </section>
+
+      <!-- Weather Section -->
+      <section class="section weather">
+        <h2>Today's Weather</h2>
+        <div id="weather-data">
+          Loading weather...
+        </div>
+      </section>
+
       <div class="flags">
         <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Flag_of_Cameroon.svg" alt="Cameroon Flag" class="flag">
         <img src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg" alt="USA Flag" class="flag">
@@ -55,6 +64,57 @@
   </div>
 
   <script>
+    // OpenWeatherMap API key
+    const apiKey = '5063ba7114d5379251959b75cd208f20';  // Replace with your actual API key
+
+    // Function to get the visitor's city based on their IP address
+    function getCity() {
+      return fetch('https://ipinfo.io/json?token=271160051bbd26')  // Replace with your ipinfo.io token
+        .then(response => response.json())
+        .then(data => {
+          const city = data.city;  // Extract city from the response
+          fetchWeather(city);  // Fetch weather for this city
+        })
+        .catch(error => {
+          console.error('Error fetching IP info:', error);
+          document.getElementById('weather-data').textContent = 'Unable to determine your city.';
+        });
+    }
+
+    // Function to fetch weather data for a city
+    function fetchWeather(city) {
+      const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;  // Use metric for Celsius temperature
+      
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+          if (data.cod === 200) {
+            const weatherDescription = data.weather[0].description;
+            const temperature = data.main.temp;
+            const humidity = data.main.humidity;
+            const windSpeed = data.wind.speed;
+
+            // Update weather info on the page
+            document.getElementById('weather-data').innerHTML = `
+              <p>Weather in ${city}:</p>
+              <p>${weatherDescription.charAt(0).toUpperCase() + weatherDescription.slice(1)}</p>
+              <p>Temperature: ${temperature}°C</p>
+              <p>Humidity: ${humidity}%</p>
+              <p>Wind Speed: ${windSpeed} m/s</p>
+            `;
+          } else {
+            document.getElementById('weather-data').textContent = 'Could not fetch weather data.';
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching weather data:', error);
+          document.getElementById('weather-data').textContent = 'Error fetching weather data.';
+        });
+    }
+
+    // Call the function to get the visitor's city and display weather
+    getCity();
+
     function getWhimsicalTime() {
       const now = new Date();
       const hours = now.getHours();
@@ -77,36 +137,15 @@
     }
 
     const quotes = [
-  "I'm not arguing, I'm just passionately clarifying my brilliance.",
-  "I follow a seafood diet: I see food, I innovate.",
-  "My computer knows me so well, it even sends Kit-Kats when I need a break!",
-  "Atoms, they make up everything... including my witty code.",
-  "Reading a book on anti-gravity? I simply can't put it down.",
-  "La vie est un code, et je suis le programmeur. - Valentin",
-  "Quand on code, on réinvente l'univers. - Valentin",
-  "L'innovation ne dort jamais, tout comme moi pendant une deadline. - Valentin",
-  "Coding is my cardio—every bug fixed is a heartbeat restored.",
-  "I don’t procrastinate; I just compile ideas in the background.",
-  "Life’s a loop, and I’m breaking out with every line of code.",
-  "My keyboard and I? We’re a love story written in binary.",
-  "Debugging is like being a detective in a crime movie where you are also the villain.",
-  "I code, therefore I am. Simple as an `if-else` statement.",
-  "Clouds aren’t just in the sky—they’re in my architecture too.",
-  "I’ve got 99 problems, but an infinite loop ain’t one (anymore).",
-  "Code like a poet, debug like a surgeon.",
-  "The only drama I allow in my life is a stack trace.",
-  "Why rest when you can REST API? Efficiency is my middle name.",
-  "CTRL + Z is the closest thing we have to a time machine.",
-  "Coding is just art with a semicolon at the end of every masterpiece.",
-  "If my life were a commit, it would say: 'Refactor reality to version 2.0'.",
-  "My ideas? They run in O(1) time—instant and optimized!",
-  "Coffee is my IDE’s fuel; logic is my drive.",
-  "When life gives me lemons, I write a script to automate lemonade production.",
-  "I could be social, but my code doesn’t debug itself.",
-  "I don’t overthink—I just recursively analyze possibilities.",
-  "Innovation is just a fancy loop that keeps re-inventing brilliance."
-];
-
+      "I'm not arguing, I'm just passionately clarifying my brilliance.",
+      "I follow a seafood diet: I see food, I innovate.",
+      "My computer knows me so well, it even sends Kit-Kats when I need a break!",
+      "Atoms, they make up everything... including my witty code.",
+      "Reading a book on anti-gravity? I simply can't put it down.",
+      "La vie est un code, et je suis le programmeur. - Valentin",
+      "Quand on code, on réinvente l'univers. - Valentin",
+      "L'innovation ne dort jamais, tout comme moi pendant une deadline. - Valentin"
+    ];
 
     function getRandomQuote() {
       const randomIndex = Math.floor(Math.random() * quotes.length);
