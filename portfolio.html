@@ -12,7 +12,7 @@
       top: -10px;
       color: white;
       user-select: none;
-      z-index: 1000;
+      z-index: 0; /* Ensure snowflakes are behind the content */
       animation: fall linear infinite;
     }
 
@@ -21,57 +21,11 @@
         transform: translateY(100vh);
       }
     }
-
-    /* General Page Styling (Optional) */
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #1e1e1e;
-      color: white;
-      margin: 0;
-      padding: 0;
-      overflow-x: hidden;
-    }
-
-    .container {
-      width: 80%;
-      margin: 0 auto;
-    }
-
-    .header {
-      text-align: center;
-      padding: 20px;
-    }
-
-    .header h1, .header h2 {
-      margin: 0;
-    }
-
-    .main {
-      margin-top: 40px;
-    }
-
-    .section {
-      margin-bottom: 40px;
-    }
-
-    .section a {
-      color: #1e90ff;
-      text-decoration: none;
-    }
-
-    .flags img {
-      width: 50px;
-      margin: 0 10px;
-    }
-
-    .footer {
-      text-align: center;
-      padding: 10px;
-      background-color: #111;
-    }
   </style>
 </head>
 <body>
+  <!-- Your static website content here -->
+
   <div class="container">
     <header class="header">
       <h1>Valentin D. Mengue Ebengue</h1>
@@ -226,16 +180,15 @@
    "In the world of code, I’m the one who calls the shots."
 ];
 
-    // Function to update the quote every 5 seconds
     function updateQuote() {
+      const quoteElement = document.getElementById('quote');
       const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-      document.getElementById('quote').textContent = randomQuote;
+      quoteElement.textContent = `"${randomQuote}"`;
     }
 
-    // Update the time and quote when the page loads
-    updateTime();
-    setInterval(updateTime, 1000); // Update every second
-    setInterval(updateQuote, 5000); // Update quote every 5 seconds
+    // Call updateQuote every 5 seconds to change the quote
+    setInterval(updateQuote, 5000);
+    updateQuote(); // Initial call to display the first quote
 
     // Snowflakes animation
     function generateSnowflakes() {
@@ -253,6 +206,9 @@
 
     // Start generating snowflakes
     generateSnowflakes();
+
+    // Update time every second
+    setInterval(updateTime, 1000);
   </script>
 </body>
 </html>
