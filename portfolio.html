@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Orchestrating Brilliance: A Journey Through Innovation</title>
-  <link rel="stylesheet" href="style.css">
   <style>
     /* General Styling */
     body {
@@ -19,6 +18,12 @@
       margin: auto;
       text-align: center;
     }
+    header, .section, footer {
+      margin-bottom: 20px;
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 10px;
+    }
     .header h1 {
       font-size: 2.5em;
     }
@@ -27,8 +32,9 @@
       margin-top: -10px;
       color: #ffcc00;
     }
-    .section {
-      margin: 30px 0;
+    .section h2 {
+      font-size: 1.8em;
+      color: #ffd700;
     }
     a {
       color: #ffcc00;
@@ -37,8 +43,7 @@
     a:hover {
       text-decoration: underline;
     }
-    .footer {
-      margin-top: 40px;
+    footer {
       font-size: 0.9em;
       color: #ccc;
     }
@@ -49,7 +54,6 @@
       color: #ffd700;
       font-style: italic;
       margin: 20px 0;
-      text-align: center;
     }
 
     /* Christmas Animation */
@@ -68,6 +72,19 @@
         transform: translateY(100vh) translateX(20px);
       }
     }
+
+    /* Additional styles for lists and sections */
+    ul {
+      list-style-type: square;
+      padding: 0 20px;
+      text-align: left;
+    }
+    li {
+      margin: 5px 0;
+    }
+    p {
+      line-height: 1.6;
+    }
   </style>
 </head>
 <body>
@@ -82,7 +99,7 @@
         <p>In a career spanning over a decade, I've danced between the clouds and code, crafting avant-garde software solutions that merge creativity and functionality. Whether working solo or leading a team, I orchestrate seamless communication, turning diverse expertise into symphonies of innovation. My role? Not just to contribute, but to lead with brilliance, shaping success from the ordinary.</p>
       </section>
       <section class="section">
-        <h2>The Detailed Curriculum Vitae or Resume</h2>
+        <h2>The Detailed Curriculum Vitae</h2>
         <a href="https://s3.amazonaws.com/emdedeval-portfolio.info/C.V.ResumeV.3.docx">Step into My World</a>
       </section>
       <section class="section">
@@ -110,12 +127,8 @@
         <h2>Today's Weather</h2>
         <div id="weather-data">Loading weather...</div>
       </section>
-      <div class="flags">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Flag_of_Cameroon.svg" alt="Cameroon Flag" class="flag">
-        <img src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg" alt="USA Flag" class="flag">
-      </div>
-      <div class="time" id="current-time"></div>
-      <div class="quote" id="quote"></div>
+      <div id="current-time"></div>
+      <div id="quote"></div>
     </main>
     <footer class="footer">
       <p>&copy; 2024 Valentin Desire Mengue Ebengue — Crafting Innovation, One Line of Code at a Time</p>
@@ -142,7 +155,6 @@
 
   <!-- Dynamic Weather, Time, and Quotes -->
   <script>
-    // OpenWeatherMap API key
     const apiKey = '622c76c7e9afcdc37741c19a5917c3ef';
 
     function getCity() {
@@ -171,14 +183,12 @@
 
     getCity();
 
-    // Local Time
     function updateTime() {
       const now = new Date();
       document.getElementById('current-time').textContent = `Current Time: ${now.toLocaleString()}`;
     }
     setInterval(updateTime, 1000);
 
-    // Quotes
     const quotes = [
    "I'm not arguing, I'm just passionately clarifying my brilliance.",
    "I follow a seafood diet: I see food, I innovate.",
@@ -205,7 +215,6 @@
    "Remember, there are no errors, just unexpected features.",
    "In the world of code, I’m the one who calls the shots."
 ];
-
     function updateQuote() {
       document.getElementById('quote').textContent = quotes[Math.floor(Math.random() * quotes.length)];
     }
