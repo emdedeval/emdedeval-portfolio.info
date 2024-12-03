@@ -4,66 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Orchestrating Brilliance: A Journey Through Innovation</title>
+  <link rel="stylesheet" href="style.css">
   <style>
-    /* General Styling */
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to bottom, #1e3c72, #2a5298);
-      color: #fff;
-    }
-    .container {
-      padding: 20px;
-      max-width: 800px;
-      margin: auto;
-      text-align: center;
-    }
-    header, .section, footer {
-      margin-bottom: 20px;
-      padding: 10px;
-      background-color: rgba(0, 0, 0, 0.5);
-      border-radius: 10px;
-    }
-    .header h1 {
-      font-size: 2.5em;
-    }
-    .header h2 {
-      font-size: 1.5em;
-      margin-top: -10px;
-      color: #ffcc00;
-    }
-    .section h2 {
-      font-size: 1.8em;
-      color: #ffd700;
-    }
-    a {
-      color: #ffcc00;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    footer {
-      font-size: 0.9em;
-      color: #ccc;
-    }
-
-    /* Quotes Styling */
-    #quote {
-      font-size: 1.2em;
-      color: #ffd700;
-      font-style: italic;
-      margin: 20px 0;
-    }
-
-    /* Christmas Animation */
+    /* Snowflake Styling */
     .snowflake {
       position: fixed;
       top: -10px;
       font-size: 1em;
       color: white;
       animation: fall linear infinite;
+      z-index: 9999; /* Ensures snowflakes appear above all elements */
     }
+
     @keyframes fall {
       0% {
         transform: translateY(-10px) translateX(0);
@@ -71,19 +23,6 @@
       100% {
         transform: translateY(100vh) translateX(20px);
       }
-    }
-
-    /* Additional styles for lists and sections */
-    ul {
-      list-style-type: square;
-      padding: 0 20px;
-      text-align: left;
-    }
-    li {
-      margin: 5px 0;
-    }
-    p {
-      line-height: 1.6;
     }
   </style>
 </head>
@@ -108,7 +47,7 @@
       </section>
       <section class="section fun-facts">
         <h2>Did You Know?</h2>
-        <ul>
+        <ul id="fun-facts-list">
           <li>I once debugged code while hiking, and the solution came with the mountain breeze!</li>
           <li>I've been known to binge-watch sci-fi series for "inspiration". My top pick? Blade Runner.</li>
           <li>My Rubik's Cube completion time is a record-breaking under 2 minutes!</li>
@@ -123,71 +62,39 @@
           <li>Experimenting with exotic cuisine, especially my signature dish, "Okok"</li>
         </ul>
       </section>
-      <section class="section weather">
-        <h2>Today's Weather</h2>
-        <div id="weather-data">Loading weather...</div>
-      </section>
-      <div id="current-time"></div>
-      <div id="quote"></div>
+      <div class="flags">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Flag_of_Cameroon.svg" alt="Cameroon Flag" class="flag">
+        <img src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg" alt="USA Flag" class="flag">
+      </div>
+      <div class="time" id="current-time"></div>
+      <div class="quote" id="quote"></div>
     </main>
     <footer class="footer">
       <p>&copy; 2024 Valentin Desire Mengue Ebengue — Crafting Innovation, One Line of Code at a Time</p>
     </footer>
   </div>
 
-  <!-- Christmas Snowflakes -->
   <script>
-    function createSnowflake() {
-      const snowflake = document.createElement("div");
-      snowflake.classList.add("snowflake");
-      snowflake.textContent = "❄";
-      snowflake.style.left = Math.random() * 100 + "vw";
-      snowflake.style.animationDuration = Math.random() * 3 + 2 + "s";
-      snowflake.style.fontSize = Math.random() * 20 + 10 + "px";
-      document.body.appendChild(snowflake);
-
-      setTimeout(() => {
-        snowflake.remove();
-      }, 5000);
+    function getWhimsicalTime() {
+      const now = new Date();
+      const hours = now.getHours();
+      const minutes = now.getMinutes().toString().padStart(2, '0');
+      const seconds = now.getSeconds().toString().padStart(2, '0');
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      const displayHours = hours % 12 || 12;
+      const daysOfWeek = ["Sunny Sunday", "Mighty Monday", "Tantalizing Tuesday", "Wacky Wednesday", "Thoughtful Thursday", "Fantastic Friday", "Sensational Saturday"];
+      const dayName = daysOfWeek[now.getDay()];
+      const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      const month = monthNames[now.getMonth()];
+      const day = now.getDate();
+      const year = now.getFullYear();
+      return `Right now, it's ${displayHours}:${minutes}:${seconds} ${ampm} on ${dayName}, ${month} ${day}, ${year}`;
     }
-    setInterval(createSnowflake, 200);
-  </script>
-
-  <!-- Dynamic Weather, Time, and Quotes -->
-  <script>
-    const apiKey = '622c76c7e9afcdc37741c19a5917c3ef';
-
-    function getCity() {
-      return fetch('https://ipinfo.io/json?token=271160051bbd26')
-        .then(response => response.json())
-        .then(data => fetchWeather(data.city))
-        .catch(() => document.getElementById('weather-data').textContent = 'Unable to determine your city.');
-    }
-
-    function fetchWeather(city) {
-      const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-      fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-          if (data.cod === 200) {
-            document.getElementById('weather-data').innerHTML = `
-              <p>Weather in ${city}:</p>
-              <p>${data.weather[0].description}</p>
-              <p>Temperature: ${data.main.temp}°C</p>
-            `;
-          } else {
-            document.getElementById('weather-data').textContent = `Error: ${data.message}`;
-          }
-        });
-    }
-
-    getCity();
 
     function updateTime() {
-      const now = new Date();
-      document.getElementById('current-time').textContent = `Current Time: ${now.toLocaleString()}`;
+      const timeElement = document.getElementById('current-time');
+      timeElement.textContent = getWhimsicalTime();
     }
-    setInterval(updateTime, 1000);
 
     const quotes = [
    "I'm not arguing, I'm just passionately clarifying my brilliance.",
@@ -215,11 +122,39 @@
    "Remember, there are no errors, just unexpected features.",
    "In the world of code, I’m the one who calls the shots."
 ];
-    function updateQuote() {
-      document.getElementById('quote').textContent = quotes[Math.floor(Math.random() * quotes.length)];
+
+    function getRandomQuote() {
+      const randomIndex = Math.floor(Math.random() * quotes.length);
+      return quotes[randomIndex];
     }
-    setInterval(updateQuote, 5000);
+
+    function updateQuote() {
+      const quoteElement = document.getElementById('quote');
+      quoteElement.textContent = getRandomQuote();
+    }
+
+    setInterval(updateTime, 1000);
+    setInterval(updateQuote, 10000);
+    updateTime();
     updateQuote();
+
+    // Snowflake Animation
+    function createSnowflake() {
+      const snowflake = document.createElement("div");
+      snowflake.classList.add("snowflake");
+      snowflake.textContent = "❄";
+      snowflake.style.left = Math.random() * 100 + "vw";
+      snowflake.style.animationDuration = Math.random() * 3 + 2 + "s";
+      snowflake.style.fontSize = Math.random() * 20 + 10 + "px";
+      document.body.appendChild(snowflake);
+
+      // Remove snowflake after it falls
+      setTimeout(() => {
+        snowflake.remove();
+      }, 5000);
+    }
+
+    setInterval(createSnowflake, 200);
   </script>
 </body>
 </html>
