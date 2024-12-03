@@ -5,6 +5,70 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Orchestrating Brilliance: A Journey Through Innovation</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* General Styling */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #1e3c72, #2a5298);
+      color: #fff;
+    }
+    .container {
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+      text-align: center;
+    }
+    .header h1 {
+      font-size: 2.5em;
+    }
+    .header h2 {
+      font-size: 1.5em;
+      margin-top: -10px;
+      color: #ffcc00;
+    }
+    .section {
+      margin: 30px 0;
+    }
+    a {
+      color: #ffcc00;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .footer {
+      margin-top: 40px;
+      font-size: 0.9em;
+      color: #ccc;
+    }
+
+    /* Quotes Styling */
+    #quote {
+      font-size: 1.2em;
+      color: #ffd700;
+      font-style: italic;
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    /* Christmas Animation */
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      font-size: 1em;
+      color: white;
+      animation: fall linear infinite;
+    }
+    @keyframes fall {
+      0% {
+        transform: translateY(-10px) translateX(0);
+      }
+      100% {
+        transform: translateY(100vh) translateX(20px);
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -27,7 +91,7 @@
       </section>
       <section class="section fun-facts">
         <h2>Did You Know?</h2>
-        <ul id="fun-facts-list">
+        <ul>
           <li>I once debugged code while hiking, and the solution came with the mountain breeze!</li>
           <li>I've been known to binge-watch sci-fi series for "inspiration". My top pick? Blade Runner.</li>
           <li>My Rubik's Cube completion time is a record-breaking under 2 minutes!</li>
@@ -42,15 +106,10 @@
           <li>Experimenting with exotic cuisine, especially my signature dish, "Okok"</li>
         </ul>
       </section>
-
-      <!-- Weather Section -->
       <section class="section weather">
         <h2>Today's Weather</h2>
-        <div id="weather-data">
-          Loading weather...
-        </div>
+        <div id="weather-data">Loading weather...</div>
       </section>
-
       <div class="flags">
         <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Flag_of_Cameroon.svg" alt="Cameroon Flag" class="flag">
         <img src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg" alt="USA Flag" class="flag">
@@ -63,117 +122,95 @@
     </footer>
   </div>
 
+  <!-- Christmas Snowflakes -->
+  <script>
+    function createSnowflake() {
+      const snowflake = document.createElement("div");
+      snowflake.classList.add("snowflake");
+      snowflake.textContent = "❄";
+      snowflake.style.left = Math.random() * 100 + "vw";
+      snowflake.style.animationDuration = Math.random() * 3 + 2 + "s";
+      snowflake.style.fontSize = Math.random() * 20 + 10 + "px";
+      document.body.appendChild(snowflake);
+
+      setTimeout(() => {
+        snowflake.remove();
+      }, 5000);
+    }
+    setInterval(createSnowflake, 200);
+  </script>
+
+  <!-- Dynamic Weather, Time, and Quotes -->
   <script>
     // OpenWeatherMap API key
-    const apiKey = '622c76c7e9afcdc37741c19a5917c3ef';  // Replace with your actual API key
+    const apiKey = '622c76c7e9afcdc37741c19a5917c3ef';
 
-    // Function to get the visitor's city based on their IP address
     function getCity() {
-      return fetch('https://ipinfo.io/json?token=271160051bbd26')  // Replace with your ipinfo.io token
+      return fetch('https://ipinfo.io/json?token=271160051bbd26')
         .then(response => response.json())
-        .then(data => {
-          const city = data.city;  // Extract city from the response
-          console.log("City fetched: ", city);  // Debugging log
-          fetchWeather(city);  // Fetch weather for this city
-        })
-        .catch(error => {
-          console.error('Error fetching IP info:', error);
-          document.getElementById('weather-data').textContent = 'Unable to determine your city.';
-        });
+        .then(data => fetchWeather(data.city))
+        .catch(() => document.getElementById('weather-data').textContent = 'Unable to determine your city.');
     }
 
-    // Function to fetch weather data for a city
     function fetchWeather(city) {
-      const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;  // Use metric for Celsius temperature
-      // If you face CORS issues, use a proxy for testing:
-      // const apiUrl = `https://cors-anywhere.herokuapp.com/https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-      
-      console.log("Weather API URL: ", apiUrl); // Debugging log
-
+      const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
       fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
-          console.log("Weather Data: ", data); // Debugging log
           if (data.cod === 200) {
-            const weatherDescription = data.weather[0].description;
-            const temperature = data.main.temp;
-            const humidity = data.main.humidity;
-            const windSpeed = data.wind.speed;
-
-            // Update weather info on the page
             document.getElementById('weather-data').innerHTML = `
               <p>Weather in ${city}:</p>
-              <p>${weatherDescription.charAt(0).toUpperCase() + weatherDescription.slice(1)}</p>
-              <p>Temperature: ${temperature}°C</p>
-              <p>Humidity: ${humidity}%</p>
-              <p>Wind Speed: ${windSpeed} m/s</p>
+              <p>${data.weather[0].description}</p>
+              <p>Temperature: ${data.main.temp}°C</p>
             `;
           } else {
-            document.getElementById('weather-data').textContent = `Could not fetch weather data. Error: ${data.message}`;
+            document.getElementById('weather-data').textContent = `Error: ${data.message}`;
           }
-        })
-        .catch(error => {
-          console.error('Error fetching weather data:', error);
-          document.getElementById('weather-data').textContent = 'Error fetching weather data.';
         });
     }
 
-    // Call the function to get the visitor's city and display weather
     getCity();
 
-    // Function to get the visitor's local time
-    function getVisitorLocalTime() {
-      const now = new Date();
-      const options = {
-        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
-        hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true
-      };
-      return now.toLocaleString('en-US', options);
-    }
-
-    // Update time display
+    // Local Time
     function updateTime() {
-      const timeElement = document.getElementById('current-time');
-      timeElement.textContent = `Current Time: ${getVisitorLocalTime()}`;
+      const now = new Date();
+      document.getElementById('current-time').textContent = `Current Time: ${now.toLocaleString()}`;
     }
+    setInterval(updateTime, 1000);
 
+    // Quotes
     const quotes = [
-      "I'm not arguing, I'm just passionately clarifying my brilliance.",
-      "I follow a seafood diet: I see food, I innovate.",
-      "My computer knows me so well, it even sends Kit-Kats when I need a break!",
-      "Atoms, they make up everything... including my witty code.",
-      "Reading a book on anti-gravity? I simply can't put it down.",
-      "La vie est un code, et je suis le programmeur. - Valentin",
-      "Quand on code, on réinvente l'univers. - Valentin",
-      "L'innovation ne dort jamais, tout comme moi pendant une deadline. - Valentin",
-      "Coding is my cardio—every bug fixed is a heartbeat restored.",
-      "I don’t procrastinate; I just compile ideas in the background.",
-      "Life’s a loop, and I’m breaking out with every line of code.",
-      "My keyboard and I? We’re a love story written in binary.",
-      "Debugging is like being a detective in a crime movie where you are also the villain.",
-      "I code, therefore I am. Simple as an `if-else` statement.",
-      "Clouds aren’t just in the sky—they’re in my architecture too.",
-      "I’ve got 99 problems, but an infinite loop ain’t one (anymore).",
-      "Code like a poet, debug like a surgeon.",
-      "The only drama I allow in my life is a stack trace.",
-      "Why rest when you can REST API? Efficiency is my middle name.",
-      "CTRL + Z is the closest thing we have to a time machine.",
-      "Coding is just art with a semicolon at the end of every masterpiece.",
-      "If my life were a commit, it would say: 'Refactored my priorities.'",
-      "Remember, there are no errors, just unexpected features.",
-      "In the world of code, I’m the one who calls the shots."
-    ];
+   "I'm not arguing, I'm just passionately clarifying my brilliance.",
+   "I follow a seafood diet: I see food, I innovate.",
+   "My computer knows me so well, it even sends Kit-Kats when I need a break!",
+   "Atoms, they make up everything... including my witty code.",
+   "Reading a book on anti-gravity? I simply can't put it down.",
+   "La vie est un code, et je suis le programmeur. - Valentin",
+   "Quand on code, on réinvente l'univers. - Valentin",
+   "L'innovation ne dort jamais, tout comme moi pendant une deadline. - Valentin",
+   "Coding is my cardio—every bug fixed is a heartbeat restored.",
+   "I don’t procrastinate; I just compile ideas in the background.",
+   "Life’s a loop, and I’m breaking out with every line of code.",
+   "My keyboard and I? We’re a love story written in binary.",
+   "Debugging is like being a detective in a crime movie where you are also the villain.",
+   "I code, therefore I am. Simple as an `if-else` statement.",
+   "Clouds aren’t just in the sky—they’re in my architecture too.",
+   "I’ve got 99 problems, but an infinite loop ain’t one (anymore).",
+   "Code like a poet, debug like a surgeon.",
+   "The only drama I allow in my life is a stack trace.",
+   "Why rest when you can REST API? Efficiency is my middle name.",
+   "CTRL + Z is the closest thing we have to a time machine.",
+   "Coding is just art with a semicolon at the end of every masterpiece.",
+   "If my life were a commit, it would say: 'Refactored my priorities.'",
+   "Remember, there are no errors, just unexpected features.",
+   "In the world of code, I’m the one who calls the shots."
+];
 
-    // Function to update the quote every 5 seconds
     function updateQuote() {
-      const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-      document.getElementById('quote').textContent = randomQuote;
+      document.getElementById('quote').textContent = quotes[Math.floor(Math.random() * quotes.length)];
     }
-
-    // Update the time and quote when the page loads
-    updateTime();
-    setInterval(updateTime, 1000); // Update every second
-    setInterval(updateQuote, 5000); // Update quote every 5 seconds
+    setInterval(updateQuote, 5000);
+    updateQuote();
   </script>
 </body>
 </html>
