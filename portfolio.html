@@ -6,23 +6,68 @@
   <title>Orchestrating Brilliance: A Journey Through Innovation</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    /* Snowflake Styling */
+    /* Snowflake styles */
     .snowflake {
-      position: fixed;
+      position: absolute;
       top: -10px;
-      font-size: 1em;
       color: white;
+      user-select: none;
+      z-index: 1000;
       animation: fall linear infinite;
-      z-index: 9999; /* Ensures snowflakes appear above all elements */
     }
 
     @keyframes fall {
-      0% {
-        transform: translateY(-10px) translateX(0);
+      to {
+        transform: translateY(100vh);
       }
-      100% {
-        transform: translateY(100vh) translateX(20px);
-      }
+    }
+
+    /* General Page Styling (Optional) */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1e1e1e;
+      color: white;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 80%;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .header h1, .header h2 {
+      margin: 0;
+    }
+
+    .main {
+      margin-top: 40px;
+    }
+
+    .section {
+      margin-bottom: 40px;
+    }
+
+    .section a {
+      color: #1e90ff;
+      text-decoration: none;
+    }
+
+    .flags img {
+      width: 50px;
+      margin: 0 10px;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 10px;
+      background-color: #111;
     }
   </style>
 </head>
@@ -38,7 +83,7 @@
         <p>In a career spanning over a decade, I've danced between the clouds and code, crafting avant-garde software solutions that merge creativity and functionality. Whether working solo or leading a team, I orchestrate seamless communication, turning diverse expertise into symphonies of innovation. My role? Not just to contribute, but to lead with brilliance, shaping success from the ordinary.</p>
       </section>
       <section class="section">
-        <h2>The Detailed Curriculum Vitae aka Resume</h2>
+        <h2>The Detailed Resume or Curriculum Vitae</h2>
         <a href="https://s3.amazonaws.com/emdedeval-portfolio.info/C.V.ResumeV.3.docx">Step into My World</a>
       </section>
       <section class="section">
@@ -62,6 +107,15 @@
           <li>Experimenting with exotic cuisine, especially my signature dish, "Okok"</li>
         </ul>
       </section>
+
+      <!-- Weather Section -->
+      <section class="section weather">
+        <h2>Today's Weather</h2>
+        <div id="weather-data">
+          Loading weather...
+        </div>
+      </section>
+
       <div class="flags">
         <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Flag_of_Cameroon.svg" alt="Cameroon Flag" class="flag">
         <img src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg" alt="USA Flag" class="flag">
@@ -75,25 +129,74 @@
   </div>
 
   <script>
-    function getWhimsicalTime() {
-      const now = new Date();
-      const hours = now.getHours();
-      const minutes = now.getMinutes().toString().padStart(2, '0');
-      const seconds = now.getSeconds().toString().padStart(2, '0');
-      const ampm = hours >= 12 ? 'PM' : 'AM';
-      const displayHours = hours % 12 || 12;
-      const daysOfWeek = ["Sunny Sunday", "Mighty Monday", "Tantalizing Tuesday", "Wacky Wednesday", "Thoughtful Thursday", "Fantastic Friday", "Sensational Saturday"];
-      const dayName = daysOfWeek[now.getDay()];
-      const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-      const month = monthNames[now.getMonth()];
-      const day = now.getDate();
-      const year = now.getFullYear();
-      return `Right now, it's ${displayHours}:${minutes}:${seconds} ${ampm} on ${dayName}, ${month} ${day}, ${year}`;
+    // OpenWeatherMap API key
+    const apiKey = '622c76c7e9afcdc37741c19a5917c3ef';  // Replace with your actual API key
+
+    // Function to get the visitor's city based on their IP address
+    function getCity() {
+      return fetch('https://ipinfo.io/json?token=271160051bbd26')  // Replace with your ipinfo.io token
+        .then(response => response.json())
+        .then(data => {
+          const city = data.city;  // Extract city from the response
+          console.log("City fetched: ", city);  // Debugging log
+          fetchWeather(city);  // Fetch weather for this city
+        })
+        .catch(error => {
+          console.error('Error fetching IP info:', error);
+          document.getElementById('weather-data').textContent = 'Unable to determine your city.';
+        });
     }
 
+    // Function to fetch weather data for a city
+    function fetchWeather(city) {
+      const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;  // Use metric for Celsius temperature
+      console.log("Weather API URL: ", apiUrl); // Debugging log
+
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+          console.log("Weather Data: ", data); // Debugging log
+          if (data.cod === 200) {
+            const weatherDescription = data.weather[0].description;
+            const temperature = data.main.temp;
+            const humidity = data.main.humidity;
+            const windSpeed = data.wind.speed;
+
+            // Update weather info on the page
+            document.getElementById('weather-data').innerHTML = `
+              <p>Weather in ${city}:</p>
+              <p>${weatherDescription.charAt(0).toUpperCase() + weatherDescription.slice(1)}</p>
+              <p>Temperature: ${temperature}°C</p>
+              <p>Humidity: ${humidity}%</p>
+              <p>Wind Speed: ${windSpeed} m/s</p>
+            `;
+          } else {
+            document.getElementById('weather-data').textContent = `Could not fetch weather data. Error: ${data.message}`;
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching weather data:', error);
+          document.getElementById('weather-data').textContent = 'Error fetching weather data.';
+        });
+    }
+
+    // Call the function to get the visitor's city and display weather
+    getCity();
+
+    // Function to get the visitor's local time
+    function getVisitorLocalTime() {
+      const now = new Date();
+      const options = {
+        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
+        hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true
+      };
+      return now.toLocaleString('en-US', options);
+    }
+
+    // Update time display
     function updateTime() {
       const timeElement = document.getElementById('current-time');
-      timeElement.textContent = getWhimsicalTime();
+      timeElement.textContent = `Current Time: ${getVisitorLocalTime()}`;
     }
 
     const quotes = [
@@ -123,38 +226,33 @@
    "In the world of code, I’m the one who calls the shots."
 ];
 
-    function getRandomQuote() {
-      const randomIndex = Math.floor(Math.random() * quotes.length);
-      return quotes[randomIndex];
-    }
-
+    // Function to update the quote every 5 seconds
     function updateQuote() {
-      const quoteElement = document.getElementById('quote');
-      quoteElement.textContent = getRandomQuote();
+      const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+      document.getElementById('quote').textContent = randomQuote;
     }
 
-    setInterval(updateTime, 1000);
-    setInterval(updateQuote, 10000);
+    // Update the time and quote when the page loads
     updateTime();
-    updateQuote();
+    setInterval(updateTime, 1000); // Update every second
+    setInterval(updateQuote, 5000); // Update quote every 5 seconds
 
-    // Snowflake Animation
-    function createSnowflake() {
-      const snowflake = document.createElement("div");
-      snowflake.classList.add("snowflake");
-      snowflake.textContent = "❄";
-      snowflake.style.left = Math.random() * 100 + "vw";
-      snowflake.style.animationDuration = Math.random() * 3 + 2 + "s";
-      snowflake.style.fontSize = Math.random() * 20 + 10 + "px";
-      document.body.appendChild(snowflake);
-
-      // Remove snowflake after it falls
-      setTimeout(() => {
-        snowflake.remove();
-      }, 5000);
+    // Snowflakes animation
+    function generateSnowflakes() {
+      const snowflakeCount = 100;
+      for (let i = 0; i < snowflakeCount; i++) {
+        const snowflake = document.createElement('div');
+        snowflake.classList.add('snowflake');
+        snowflake.textContent = '❄';
+        snowflake.style.left = `${Math.random() * 100}vw`; // Random horizontal position
+        snowflake.style.animationDuration = `${Math.random() * 3 + 2}s`; // Random fall speed
+        snowflake.style.fontSize = `${Math.random() * 10 + 10}px`; // Random size
+        document.body.appendChild(snowflake);
+      }
     }
 
-    setInterval(createSnowflake, 200);
+    // Start generating snowflakes
+    generateSnowflakes();
   </script>
 </body>
 </html>
