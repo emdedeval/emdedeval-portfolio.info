@@ -21,26 +21,6 @@
         transform: translateY(100vh);
       }
     }
-
-    /* Countdown styles */
-    .countdown {
-      text-align: center;
-      font-family: Arial, sans-serif;
-      color: #fff;
-      background: linear-gradient(45deg, #ff5733, #900c3f, #581845);
-      padding: 20px;
-      border-radius: 10px;
-      margin: 20px auto;
-      width: fit-content;
-      font-size: 24px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    }
-
-    .countdown span {
-      font-size: 2em;
-      font-weight: bold;
-      margin: 0 5px;
-    }
   </style>
 </head>
 <body>
@@ -90,14 +70,6 @@
         </div>
       </section>
 
-      <!-- New Year Countdown -->
-      <section class="section countdown-section">
-        <h2>New Year Countdown</h2>
-        <div id="countdown" class="countdown">
-          Time Remaining: <span id="days"></span> days, <span id="hours"></span> hours, <span id="minutes"></span> minutes, <span id="seconds"></span> seconds
-        </div>
-      </section>
-
       <div class="flags">
         <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Flag_of_Cameroon.svg" alt="Cameroon Flag" class="flag">
         <img src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg" alt="USA Flag" class="flag">
@@ -111,29 +83,133 @@
   </div>
 
   <script>
-    // Countdown Timer for New Year
-    function updateCountdown() {
-      const now = new Date();
-      const nextYear = now.getFullYear() + 1;
-      const newYear = new Date(`January 1, ${nextYear} 00:00:00`).getTime();
-      const timeLeft = newYear - now.getTime();
+    // OpenWeatherMap API key
+    const apiKey = '622c76c7e9afcdc37741c19a5917c3ef';  // Replace with your actual API key
 
-      const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-      document.getElementById('days').textContent = days;
-      document.getElementById('hours').textContent = hours;
-      document.getElementById('minutes').textContent = minutes;
-      document.getElementById('seconds').textContent = seconds;
+    // Function to get the visitor's city based on their IP address
+    function getCity() {
+      return fetch('https://ipinfo.io/json?token=271160051bbd26')  // Replace with your ipinfo.io token
+        .then(response => response.json())
+        .then(data => {
+          const city = data.city;  // Extract city from the response
+          console.log("City fetched: ", city);  // Debugging log
+          fetchWeather(city);  // Fetch weather for this city
+        })
+        .catch(error => {
+          console.error('Error fetching IP info:', error);
+          document.getElementById('weather-data').textContent = 'Unable to determine your city.';
+        });
     }
 
-    // Update countdown every second
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
+    // Function to fetch weather data for a city
+    function fetchWeather(city) {
+      const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;  // Use metric for Celsius temperature
+      console.log("Weather API URL: ", apiUrl); // Debugging log
 
-    // Existing JavaScript functions remain unchanged...
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+          console.log("Weather Data: ", data); // Debugging log
+          if (data.cod === 200) {
+            const weatherDescription = data.weather[0].description;
+            const temperature = data.main.temp;
+            const humidity = data.main.humidity;
+            const windSpeed = data.wind.speed;
+
+            // Update weather info on the page
+            document.getElementById('weather-data').innerHTML = `
+              <p>Weather in ${city}:</p>
+              <p>${weatherDescription.charAt(0).toUpperCase() + weatherDescription.slice(1)}</p>
+              <p>Temperature: ${temperature}°C</p>
+              <p>Humidity: ${humidity}%</p>
+              <p>Wind Speed: ${windSpeed} m/s</p>
+            `;
+          } else {
+            document.getElementById('weather-data').textContent = `Could not fetch weather data. Error: ${data.message}`;
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching weather data:', error);
+          document.getElementById('weather-data').textContent = 'Error fetching weather data.';
+        });
+    }
+
+    // Call the function to get the visitor's city and display weather
+    getCity();
+
+    // Function to get the visitor's local time
+    function getVisitorLocalTime() {
+      const now = new Date();
+      const options = {
+        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
+        hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true
+      };
+      return now.toLocaleString('en-US', options);
+    }
+
+    // Update time display
+    function updateTime() {
+      const timeElement = document.getElementById('current-time');
+      timeElement.textContent = `Current Time: ${getVisitorLocalTime()}`;
+    }
+
+    const quotes = [
+   "I'm not arguing, I'm just passionately clarifying my brilliance.",
+   "I follow a seafood diet: I see food, I innovate.",
+   "My computer knows me so well, it even sends Kit-Kats when I need a break!",
+   "Atoms, they make up everything... including my witty code.",
+   "Reading a book on anti-gravity? I simply can't put it down.",
+   "La vie est un code, et je suis le programmeur. - Valentin",
+   "Quand on code, on réinvente l'univers. - Valentin",
+   "L'innovation ne dort jamais, tout comme moi pendant une deadline. - Valentin",
+   "Coding is my cardio—every bug fixed is a heartbeat restored.",
+   "I don’t procrastinate; I just compile ideas in the background.",
+   "Life’s a loop, and I’m breaking out with every line of code.",
+   " Good morning Nguina family.",
+   "My keyboard and I? We’re a love story written in binary.",
+   "Debugging is like being a detective in a crime movie where you are also the villain.",
+   "I code, therefore I am. Simple as an `if-else` statement.",
+   "Clouds aren’t just in the sky—they’re in my architecture too.",
+   "I’ve got 99 problems, but an infinite loop ain’t one (anymore).",
+   "Code like a poet, debug like a surgeon.",
+   "The only drama I allow in my life is a stack trace.",
+   "Why rest when you can REST API? Efficiency is my middle name.",
+   "CTRL + Z is the closest thing we have to a time machine.",
+   "Coding is just art with a semicolon at the end of every masterpiece.",
+   "If my life were a commit, it would say: 'Refactored my priorities.'",
+   "Remember, there are no errors, just unexpected features.",
+   "In the world of code, I’m the one who calls the shots."
+];
+
+    function updateQuote() {
+      const quoteElement = document.getElementById('quote');
+      const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+      quoteElement.textContent = `"${randomQuote}"`;
+    }
+
+    // Call updateQuote every 5 seconds to change the quote
+    setInterval(updateQuote, 5000);
+    updateQuote(); // Initial call to display the first quote
+
+    // Snowflakes animation
+    function generateSnowflakes() {
+      const snowflakeCount = 100;
+      for (let i = 0; i < snowflakeCount; i++) {
+        const snowflake = document.createElement('div');
+        snowflake.classList.add('snowflake');
+        snowflake.textContent = '❄';
+        snowflake.style.left = `${Math.random() * 100}vw`; // Random horizontal position
+        snowflake.style.animationDuration = `${Math.random() * 3 + 2}s`; // Random fall speed
+        snowflake.style.fontSize = `${Math.random() * 10 + 10}px`; // Random size
+        document.body.appendChild(snowflake);
+      }
+    }
+
+    // Start generating snowflakes
+    generateSnowflakes();
+
+    // Update time every second
+    setInterval(updateTime, 1000);
   </script>
 </body>
 </html>
