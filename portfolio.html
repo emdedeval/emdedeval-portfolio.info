@@ -5,99 +5,64 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Orchestrating Brilliance: A Journey Through Innovation</title>
   <style>
-    /* General Styling */
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background: linear-gradient(to bottom, #1e3c72, #2a5298);
-      color: #ffffff;
-      overflow: hidden;
+      color: white;
+      overflow-x: hidden;
     }
 
     .container {
-      max-width: 1200px;
-      margin: auto;
       padding: 20px;
       text-align: center;
     }
 
-    h1, h2 {
-      margin: 0;
-      padding: 10px;
-    }
-
-    a {
-      color: #00e5ff;
-      text-decoration: none;
+    .header h1, .header h2 {
+      margin: 10px 0;
     }
 
     .section {
       margin: 20px 0;
-    }
-
-    .quote-box {
-      background: rgba(0, 0, 0, 0.5);
       padding: 20px;
-      margin: 20px 0;
+      background: rgba(0, 0, 0, 0.5);
       border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
     }
 
-    .quote-box p {
-      font-style: italic;
-      font-size: 1.2rem;
-      line-height: 1.5;
+    a {
+      color: #1abc9c;
+      text-decoration: none;
     }
 
-    .quote-box span {
-      display: block;
-      margin-top: 10px;
-      font-weight: bold;
-      color: #00e5ff;
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .flags img {
+      width: 50px;
+      margin: 5px;
     }
 
     .countdown {
-      background: rgba(0, 0, 0, 0.5);
-      padding: 20px;
-      border-radius: 10px;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      animation: pulse 3s infinite;
-    }
-
-    .time-box {
-      text-align: center;
-    }
-
-    .time-box span {
-      display: block;
-      font-size: 2rem;
+      font-size: 1.5rem;
       font-weight: bold;
-      color: #00e5ff;
-      text-shadow: 0 0 10px #00e5ff;
     }
 
-    .time-box small {
-      font-size: 1rem;
-      color: #ddd;
+    #quote {
+      margin-top: 20px;
+      font-style: italic;
+      font-size: 1.2rem;
     }
 
-    @keyframes pulse {
-      0%, 100% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.1);
-      }
+    #current-time {
+      margin-top: 10px;
     }
 
-    /* Snowflake Styling */
+    /* Snowflake styles */
     .snowflake {
       position: absolute;
       top: -10px;
-      color: #ffffff;
-      opacity: 0.8;
+      color: white;
       user-select: none;
       z-index: 0;
       animation: fall linear infinite;
@@ -109,93 +74,66 @@
       }
     }
 
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      .countdown {
-        flex-direction: column;
+    /* Responsive design */
+    @media (max-width: 600px) {
+      .header h1 {
+        font-size: 1.8rem;
       }
 
-      .time-box span {
-        font-size: 1.5rem;
+      .header h2 {
+        font-size: 1.2rem;
+      }
+
+      .countdown {
+        font-size: 1.2rem;
+      }
+
+      #quote {
+        font-size: 1rem;
       }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <header>
+    <header class="header">
       <h1>Valentin D. Mengue Ebengue</h1>
       <h2>AWS Cloud Engineer / DevOps Engineer</h2>
     </header>
 
     <main>
-      <!-- The Dawn of My Path to Innovation -->
       <section class="section">
         <h2>The Dawn of My Path to Innovation</h2>
-        <p>In a career spanning over a decade, I've danced between the clouds and code, crafting avant-garde software solutions that merge creativity and functionality. Whether working solo or leading a team, I orchestrate seamless communication, turning diverse expertise into symphonies of innovation. My role? Not just to contribute, but to lead with brilliance, shaping success from the ordinary.</p>
+        <p>In a career spanning over a decade, I've danced between the clouds and code...</p>
       </section>
 
-      <!-- Inspirational Quotes -->
-      <section class="section">
-        <h2>Inspirational Quotes</h2>
-        <div class="quote-box">
-          <p>"Success is not the key to happiness. Happiness is the key to success. If you love what you are doing, you will be successful."</p>
-          <span>- Albert Schweitzer</span>
-        </div>
-        <div class="quote-box">
-          <p>"The best way to predict the future is to create it."</p>
-          <span>- Peter Drucker</span>
-        </div>
-        <div class="quote-box">
-          <p>"Innovation distinguishes between a leader and a follower."</p>
-          <span>- Steve Jobs</span>
-        </div>
-      </section>
-
-      <!-- Detailed Resume -->
       <section class="section">
         <h2>The Detailed Resume or Curriculum Vitae</h2>
-        <a href="https://s3.amazonaws.com/emdedeval-portfolio.info/C.V.ResumeV.3.docx">Step into My World</a>
+        <a href="https://s3.amazonaws.com/emdedeval-portfolio.info/C.V.ResumeV.3.docx" target="_blank">Step into My World</a>
       </section>
 
-      <!-- Project Display -->
       <section class="section">
         <h2>The Project Display</h2>
-        <a href="https://s3.amazonaws.com/emdedeval-portfolio.info/my_portfolio.html">Marvel at My Creations</a>
+        <a href="https://s3.amazonaws.com/emdedeval-portfolio.info/my_portfolio.html" target="_blank">Marvel at My Creations</a>
       </section>
 
-      <!-- Fun Facts -->
-      <section class="section fun-facts">
-        <h2>Did You Know?</h2>
-        <ul>
-          <li>I once debugged code while hiking, and the solution came with the mountain breeze!</li>
-          <li>I've been known to binge-watch sci-fi series for "inspiration". My top pick? Blade Runner.</li>
-          <li>My Rubik's Cube completion time is a record-breaking under 2 minutes!</li>
-        </ul>
-      </section>
-
-      <!-- Countdown to New Year -->
-      <section class="section">
+      <section class="section countdown">
         <h2>Countdown to New Year</h2>
-        <div id="countdown" class="countdown">
-          <div class="time-box">
-            <span id="days">00</span>
-            <small>Days</small>
-          </div>
-          <div class="time-box">
-            <span id="hours">00</span>
-            <small>Hours</small>
-          </div>
-          <div class="time-box">
-            <span id="minutes">00</span>
-            <small>Minutes</small>
-          </div>
-          <div class="time-box">
-            <span id="seconds">00</span>
-            <small>Seconds</small>
-          </div>
-        </div>
+        <div id="new-year-countdown">Loading countdown...</div>
       </section>
+
+      <section class="section">
+        <h2>Today's Weather</h2>
+        <div id="weather-data">Loading weather...</div>
+      </section>
+
+      <div class="flags">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Flag_of_Cameroon.svg" alt="Cameroon Flag">
+        <img src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg" alt="USA Flag">
+      </div>
+
+      <div id="quote">Loading quote...</div>
+      <div id="current-time">Loading time...</div>
     </main>
 
     <footer>
@@ -204,7 +142,7 @@
   </div>
 
   <script>
-    // Countdown Logic
+    // Countdown to New Year
     function updateCountdown() {
       const now = new Date();
       const nextYear = now.getFullYear() + 1;
@@ -212,33 +150,54 @@
       const timeDiff = newYear - now;
 
       if (timeDiff <= 0) {
-        document.getElementById('countdown').innerHTML = '<h3>Happy New Year! 🎉</h3>';
+        document.getElementById('new-year-countdown').textContent = "Happy New Year!";
         return;
       }
 
       const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
       const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((timeDiff % (1000)) / 1000);
+      const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
 
-      document.getElementById('days').textContent = days.toString().padStart(2, '0');
-      document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-      document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-      document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+      document.getElementById('new-year-countdown').textContent =
+        `${days}d ${hours}h ${minutes}m ${seconds}s`;
     }
 
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // Snowflake Animation
+    // Quotes
+    const quotes = [
+      "I'm not arguing, I'm just passionately clarifying my brilliance.",
+      "Life’s a loop, and I’m breaking out with every line of code.",
+      "My keyboard and I? We’re a love story written in binary.",
+      "Coding is just art with a semicolon at the end of every masterpiece."
+    ];
+
+    function updateQuote() {
+      const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+      document.getElementById('quote').textContent = `"${randomQuote}"`;
+    }
+
+    setInterval(updateQuote, 5000);
+    updateQuote();
+
+    // Current Time
+    function updateTime() {
+      document.getElementById('current-time').textContent = `Current Time: ${new Date().toLocaleTimeString()}`;
+    }
+
+    setInterval(updateTime, 1000);
+    updateTime();
+
+    // Snowflakes Animation
     function generateSnowflakes() {
-      for (let i = 0; i < 50; i++) {
+      for (let i = 0; i < 100; i++) {
         const snowflake = document.createElement('div');
         snowflake.classList.add('snowflake');
         snowflake.textContent = '❄';
         snowflake.style.left = `${Math.random() * 100}vw`;
-        snowflake.style.animationDuration = `${Math.random() * 5 + 2}s`;
-        snowflake.style.opacity = `${Math.random()}`;
+        snowflake.style.animationDuration = `${Math.random() * 3 + 2}s`;
         snowflake.style.fontSize = `${Math.random() * 10 + 10}px`;
         document.body.appendChild(snowflake);
       }
