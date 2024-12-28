@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,31 +7,32 @@
   <style>
     /* Global styles */
     body {
-      font-family: 'Arial', sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
-      background: #e0e0e0;
-      color: #333;
+      background: linear-gradient(135deg, #6a82fb, #fc5c7d);
+      color: #fff;
+      line-height: 1.6;
     }
 
     header {
-      background: #444;
+      background: rgba(0, 0, 0, 0.7);
       color: #fff;
-      padding: 25px 0;
+      padding: 40px 0;
       text-align: center;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     }
 
     .container {
-      max-width: 1200px;
-      margin: 20px auto;
-      padding: 30px;
-      background: #fff;
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.1);
       border-radius: 12px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
     }
 
-    /* Profile section styles */
+    /* Profile section */
     .profile {
       text-align: center;
       margin-bottom: 40px;
@@ -40,48 +40,54 @@
 
     /* Section styles */
     .section {
-      margin-bottom: 50px;
+      margin-bottom: 40px;
     }
 
     .section h2 {
-      font-size: 32px;
-      color: #555;
-      border-bottom: 3px solid #444;
+      font-size: 2.5rem;
+      color: #fff;
+      border-bottom: 2px solid #fc5c7d;
       padding-bottom: 12px;
       margin-bottom: 30px;
     }
 
     .section p,
     .section a {
-      font-size: 18px;
+      font-size: 1.1rem;
+      color: #ddd;
+      margin-bottom: 20px;
       line-height: 1.8;
-      color: #666;
-      margin-bottom: 15px;
     }
 
     /* Portfolio item styles */
     .portfolio-item {
-      margin-bottom: 50px;
+      margin-bottom: 40px;
+      text-align: center;
     }
 
     .portfolio-item img {
       width: 100%;
+      max-width: 600px;
       height: auto;
       border-radius: 12px;
       margin-bottom: 20px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .portfolio-item img:hover {
+      transform: scale(1.05);
     }
 
     .portfolio-item h3 {
-      font-size: 26px;
-      color: #333;
+      font-size: 1.8rem;
+      color: #fff;
       margin-bottom: 15px;
     }
 
     .portfolio-item p {
-      font-size: 18px;
-      line-height: 1.8;
-      color: #777;
+      font-size: 1.1rem;
+      color: #ddd;
       margin-bottom: 15px;
     }
 
@@ -90,20 +96,19 @@
       text-align: center;
       background: linear-gradient(135deg, #74ebd5, #acb6e5);
       color: #333;
-      padding: 40px 25px;
+      padding: 40px 20px;
       border-radius: 12px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
       margin-top: 50px;
     }
 
     .contact h2 {
-      font-size: 32px;
-      margin-bottom: 25px;
+      font-size: 2rem;
+      margin-bottom: 20px;
     }
 
     .contact p {
-      font-size: 20px;
-      line-height: 1.6;
+      font-size: 1.2rem;
       margin: 15px 0;
     }
 
@@ -114,6 +119,12 @@
       border-bottom: 2px solid #333;
       display: inline-block;
       margin-right: 10px;
+      transition: color 0.3s ease;
+    }
+
+    .contact a:hover {
+      color: #fc5c7d;
+      border-color: #fc5c7d;
     }
 
     .contact a img {
@@ -123,32 +134,26 @@
       margin-right: 8px;
     }
 
-    .contact a.linkedin {
-      color: #0077B5;
-      border-bottom: 2px solid #0077B5;
-    }
-
     /* Responsive styles */
     @media (max-width: 768px) {
       .section h2 {
-        font-size: 28px;
+        font-size: 2rem;
       }
 
       .portfolio-item h3 {
-        font-size: 22px;
+        font-size: 1.5rem;
       }
 
       .contact h2 {
-        font-size: 28px;
+        font-size: 1.8rem;
       }
 
       .contact p {
-        font-size: 18px;
+        font-size: 1rem;
       }
     }
   </style>
 </head>
-
 <body>
   <!-- Header section -->
   <header>
@@ -157,15 +162,10 @@
 
   <!-- Main container -->
   <div class="container">
-    <!-- Profile section -->
-    <div class="profile">
-      <!-- Profile image section removed for simplicity -->
-    </div>
-
     <!-- About Me section -->
     <div class="section">
       <h2>About Me</h2>
-      <p>Welcome to my portfolio! I am a dedicated and innovative Cloud/DevOps Engineer with a strong focus on creating robust and scalable infrastructure solutions. With extensive experience in Infrastructure as Code (IaC) automation and Python scripting, I excel at designing interactive, reliable, and self-healing systems that drive efficiency and foster technological advancement. I am passionate about exploring emerging technologies and continuously refining my skills to stay ahead in the fast-paced tech world.</p>
+      <p>Welcome to my portfolio! I am a dedicated and innovative Cloud/DevOps Engineer with a strong focus on creating robust and scalable infrastructure solutions. I excel at designing interactive, reliable, and self-healing systems that drive efficiency and foster technological advancement.</p>
     </div>
 
     <!-- Projects section -->
@@ -174,25 +174,25 @@
       <div class="portfolio-item">
         <img src="CICD.jpg" alt="CI/CD Pipeline Project Image">
         <h3>GitHub Monorepo Integration with AWS CodePipeline</h3>
-        <p>This project demonstrates the integration of AWS CodePipeline to automate release processes for a GitHub monorepo. The customized pipeline triggers specific builds and deployments based on GitHub events, enhancing the CI/CD workflow and ensuring a streamlined delivery process.</p>
+        <p>This project automates release processes for a GitHub monorepo using AWS CodePipeline, enhancing CI/CD workflows and streamlining delivery.</p>
       </div>
 
       <div class="portfolio-item">
         <img src="Migration.jpg" alt="Migration Project Image">
         <h3>Seamless Migration of On-Premises Workloads with AWS Application Migration Service</h3>
-        <p>Utilizing AWS Application Migration Service (AWS MGN), this project showcases the migration of on-premises workloads to the cloud. It highlights the process of lifting and shifting servers to AWS with minimal compatibility issues and performance disruptions, reducing both cost and complexity.</p>
+        <p>Showcasing the migration of on-premises workloads to AWS using the Application Migration Service, this project reduces cost and complexity.</p>
       </div>
     </div>
 
     <!-- Contact section -->
     <div class="contact section">
       <h2>Contact Me</h2>
-      <p>I'm eager to connect and collaborate on new projects, innovative ideas, or exciting opportunities. Feel free to reach out via email, phone, or connect with me on LinkedIn.</p>
+      <p>Let's connect and collaborate! Reach out via email, phone, or LinkedIn.</p>
       <p>Email: <a href="mailto:emdedeval@gmail.com">emdedeval@gmail.com</a></p>
       <p>Phone: <a href="tel:+17035466479">703-546-6479</a></p>
       <div class="social-links">
         <p>
-          <a href="https://linkedin.com/in/YourLinkedInProfile" class="linkedin" target="_blank">
+          <a href="https://linkedin.com/in/YourLinkedInProfile" target="_blank">
             <img src="Ll-Logo.png" alt="LinkedIn Logo">Connect with me on LinkedIn
           </a>
         </p>
@@ -200,5 +200,4 @@
     </div>
   </div>
 </body>
-
 </html>
