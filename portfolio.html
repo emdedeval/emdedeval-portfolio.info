@@ -6,94 +6,171 @@
   <title>Orchestrating Brilliance: A Journey Through Innovation</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    /* Dark/Light mode styles */
+    /* Snowflake styles */
+    .snowflake {
+      position: absolute;
+      top: -10px;
+      color: white;
+      user-select: none;
+      z-index: 0; /* Ensure snowflakes are behind the content */
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh);
+      }
+    }
+
+    /* Countdown styles */
+    .countdown {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 24px;
+      color: #ffffff;
+      background: #333;
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    /* Dark mode styles */
     body.dark-mode {
       background-color: #121212;
       color: #ffffff;
     }
-
-    .toggle-mode {
+    .dark-mode-toggle {
       position: fixed;
       top: 20px;
       right: 20px;
-      background: #ffcc00;
-      color: #333;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 20px;
-      cursor: pointer;
-      z-index: 1000;
-    }
-
-    .toggle-mode.dark {
       background: #333;
-      color: #ffcc00;
-    }
-
-    /* Spinner styles */
-    .spinner {
-      display: none;
-      border: 4px solid rgba(0, 0, 0, 0.1);
-      border-left-color: #000;
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    /* Sticky header */
-    header {
-      position: sticky;
-      top: 0;
-      background: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(5px);
-      z-index: 1000;
-    }
-
-    /* Snowflake color animation */
-    @keyframes color-change {
-      0% { color: white; }
-      50% { color: cyan; }
-      100% { color: magenta; }
-    }
-
-    .snowflake {
-      animation: fall linear infinite, color-change 3s infinite;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <button class="toggle-mode" id="toggle-mode">Toggle Dark Mode</button>
-  <div class="spinner" id="spinner"></div>
+  <button class="dark-mode-toggle" id="dark-mode-toggle">Toggle Dark Mode</button>
 
-  <header class="header">
-    <h1 id="greeting">Loading Greeting...</h1>
-    <h2>AWS Cloud Engineer / DevOps Engineer</h2>
-  </header>
-  
-  <main class="main">
-    <section class="section fun-facts">
-      <h2>Did You Know?</h2>
-      <ul id="fun-facts-list">
-        <li>I once debugged code while hiking, and the solution came with the mountain breeze!</li>
-        <li>I've been known to binge-watch sci-fi series for "inspiration". My top pick? Blade Runner.</li>
-        <li>My Rubik's Cube completion time is a record-breaking under 2 minutes!</li>
-      </ul>
-      <button id="more-facts">Show More Fun Facts</button>
-    </section>
-  </main>
+  <div class="container">
+    <header class="header">
+      <h1>Valentin D. Mengue Ebengue</h1>
+      <h2>AWS Cloud Engineer / DevOps Engineer</h2>
+    </header>
+    <main class="main">
+      <section class="section">
+        <h2>The Dawn of My Path to Innovation</h2>
+        <p>In a career spanning over a decade, I've danced between the clouds and code, crafting avant-garde software solutions that merge creativity and functionality. Whether working solo or leading a team, I orchestrate seamless communication, turning diverse expertise into symphonies of innovation. My role? Not just to contribute, but to lead with brilliance, shaping success from the ordinary.</p>
+      </section>
+      <section class="section">
+        <h2>The Detailed Resume or Curriculum Vitae</h2>
+        <a href="https://s3.amazonaws.com/emdedeval-portfolio.info/C.V.ResumeV.3.docx">Step into My World</a>
+      </section>
+      <section class="section">
+        <h2>The Project Display</h2>
+        <a href="https://s3.amazonaws.com/emdedeval-portfolio.info/my_portfolio.html">Marvel at My Creations</a>
+      </section>
+      <section class="section fun-facts">
+        <h2>Did You Know?</h2>
+        <ul id="fun-facts-list">
+          <li>I once debugged code while hiking, and the solution came with the mountain breeze!</li>
+          <li>I've been known to binge-watch sci-fi series for "inspiration". My top pick? Blade Runner.</li>
+          <li>My Rubik's Cube completion time is a record-breaking under 2 minutes!</li>
+        </ul>
+      </section>
+      <section class="section hobbies">
+        <h2>Where Creativity and Relaxation Collide</h2>
+        <p>When my keyboard rests, my spirit soars in these endeavors:</p>
+        <ul>
+          <li>Embarking on adrenaline-packed mountain hikes with "NSŌ-FA CLUB"</li>
+          <li>Composing melodies on my guitar, a fusion of sound and code</li>
+          <li>Experimenting with exotic cuisine, especially my signature dish, "Okok"</li>
+        </ul>
+      </section>
+
+      <!-- New Year Countdown Section -->
+      <section class="section countdown">
+        <h2>Countdown to New Year</h2>
+        <div id="new-year-countdown">Loading countdown...</div>
+      </section>
+
+      <!-- Weather Section -->
+      <section class="section weather">
+        <h2>Today's Weather</h2>
+        <div id="weather-data">Loading weather...</div>
+      </section>
+
+      <div class="flags">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Flag_of_Cameroon.svg" alt="Cameroon Flag" class="flag">
+        <img src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg" alt="USA Flag" class="flag">
+      </div>
+      <div class="time" id="current-time"></div>
+      <div class="quote" id="quote"></div>
+    </main>
+    <footer class="footer">
+      <p>&copy; 2024 Valentin Desire Mengue Ebengue — Crafting Innovation, One Line of Code at a Time</p>
+    </footer>
+  </div>
 
   <script>
-    // AI-Powered Greeting
-    function updateGreeting() {
+    // Countdown to New Year
+    function updateCountdown() {
+      const now = new Date();
+      const nextYear = now.getFullYear() + 1;
+      const newYear = new Date(`January 1, ${nextYear} 00:00:00`);
+      const timeDiff = newYear - now;
+
+      if (timeDiff <= 0) {
+        document.getElementById('new-year-countdown').textContent = "Happy New Year!";
+        return;
+      }
+
+      const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+      document.getElementById('new-year-countdown').textContent =
+        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // Weather API Integration
+    const apiKey = '622c76c7e9afcdc37741c19a5917c3ef';
+    function getCity() {
+      return fetch('https://ipinfo.io/json?token=271160051bbd26')
+        .then(response => response.json())
+        .then(data => fetchWeather(data.city))
+        .catch(error => console.error('Error fetching IP info:', error));
+    }
+
+    function fetchWeather(city) {
+      const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+          if (data.cod === 200) {
+            document.getElementById('weather-data').innerHTML = `
+              <p>Weather in ${city}:</p>
+              <p>${data.weather[0].description}</p>
+              <p>Temperature: ${data.main.temp}°C</p>
+              <p>Humidity: ${data.main.humidity}%</p>
+              <p>Wind Speed: ${data.wind.speed} m/s</p>`;
+          }
+        })
+        .catch(error => console.error('Error fetching weather data:', error));
+    }
+
+    getCity();
+
+    // Dynamic Greetings
+    function dynamicGreeting() {
       const hours = new Date().getHours();
       let greeting;
-
       if (hours < 12) {
         greeting = "Good Morning!";
       } else if (hours < 18) {
@@ -101,70 +178,75 @@
       } else {
         greeting = "Good Evening!";
       }
-
-      document.getElementById('greeting').textContent = greeting;
+      const header = document.querySelector('.header');
+      const greetingElement = document.createElement('h3');
+      greetingElement.textContent = greeting;
+      header.appendChild(greetingElement);
     }
+    dynamicGreeting();
 
-    // Dark/Light Mode Toggle
-    const toggleModeButton = document.getElementById('toggle-mode');
-    toggleModeButton.addEventListener('click', () => {
+    // Dark Mode Toggle
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    darkModeToggle.addEventListener('click', () => {
       document.body.classList.toggle('dark-mode');
-      toggleModeButton.classList.toggle('dark');
     });
 
-    // Show more fun facts
+    // Quotes and time display
     const quotes = [
-   "I'm not arguing, I'm just passionately clarifying my brilliance.",
-   "I follow a seafood diet: I see food, I innovate.",
-   "My computer knows me so well, it even sends Kit-Kats when I need a break!",
-   "Atoms, they make up everything... including my witty code.",
-   "Reading a book on anti-gravity? I simply can't put it down.",
-   "La vie est un code, et je suis le programmeur. - Valentin",
-   "Quand on code, on réinvente l'univers. - Valentin",
-   "L'innovation ne dort jamais, tout comme moi pendant une deadline. - Valentin",
-   "Coding is my cardio—every bug fixed is a heartbeat restored.",
-   "I don’t procrastinate; I just compile ideas in the background.",
-   "Life’s a loop, and I’m breaking out with every line of code.",
-   "My keyboard and I? We’re a love story written in binary.",
-   "Debugging is like being a detective in a crime movie where you are also the villain.",
-   "I code, therefore I am. Simple as an `if-else` statement.",
-   "Clouds aren’t just in the sky—they’re in my architecture too.",
-   "I’ve got 99 problems, but an infinite loop ain’t one (anymore).",
-   "Code like a poet, debug like a surgeon.",
-   "The only drama I allow in my life is a stack trace.",
-   "Why rest when you can REST API? Efficiency is my middle name.",
-   "CTRL + Z is the closest thing we have to a time machine.",
-   "Coding is just art with a semicolon at the end of every masterpiece.",
-   "If my life were a commit, it would say: 'Refactored my priorities.'",
-   "Remember, there are no errors, just unexpected features.",
-   "In the world of code, I’m the one who calls the shots."
-];
+      "I'm not arguing, I'm just passionately clarifying my brilliance.",
+      "I follow a seafood diet: I see food, I innovate.",
+      "My computer knows me so well, it even sends Kit-Kats when I need a break!",
+      "Atoms, they make up everything... including my witty code.",
+      "Reading a book on anti-gravity? I simply can't put it down.",
+      "La vie est un code, et je suis le programmeur. - Valentin",
+      "Quand on code, on réinvente l'univers. - Valentin",
+      "L'innovation ne dort jamais, tout comme moi pendant une deadline. - Valentin",
+      "Coding is my cardio—every bug fixed is a heartbeat restored.",
+      "I don’t procrastinate; I just compile ideas in the background.",
+      "Life’s a loop, and I’m breaking out with every line of code.",
+      "My keyboard and I? We’re a love story written in binary.",
+      "Debugging is like being a detective in a crime movie where you are also the villain.",
+      "I code, therefore I am. Simple as an `if-else` statement.",
+      "Clouds aren’t just in the sky—they’re in my architecture too.",
+      "I’ve got 99 problems, but an infinite loop ain’t one (anymore).",
+      "Code like a poet, debug like a surgeon.",
+      "The only drama I allow in my life is a stack trace.",
+      "Why rest when you can REST API? Efficiency is my middle name.",
+      "CTRL + Z is the closest thing we have to a time machine.",
+      "Coding is just art with a semicolon at the end of every masterpiece.",
+      "If my life were a commit, it would say: 'Refactored my priorities.'",
+      "Remember, there are no errors, just unexpected features.",
+      "In the world of code, I’m the one who calls the shots."
+    ];
 
-    const funFactsList = document.getElementById('fun-facts-list');
-    const moreFactsButton = document.getElementById('more-facts');
-
-    moreFactsButton.addEventListener('click', () => {
-      funFacts.forEach(fact => {
-        const li = document.createElement('li');
-        li.textContent = fact;
-        funFactsList.appendChild(li);
-      });
-      moreFactsButton.disabled = true; // Disable button after adding facts
-    });
-
-    // Spinner for weather
-    const spinner = document.getElementById('spinner');
-
-    function showSpinner() {
-      spinner.style.display = 'block';
+    function updateQuote() {
+      const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+      document.getElementById('quote').textContent = `"${randomQuote}"`;
     }
 
-    function hideSpinner() {
-      spinner.style.display = 'none';
+    function updateTime() {
+      document.getElementById('current-time').textContent = `Current Time: ${new Date().toLocaleTimeString()}`;
     }
 
-    // Initialize features
-    updateGreeting();
+    setInterval(updateQuote, 5000);
+    setInterval(updateTime, 1000);
+    updateQuote();
+    updateTime();
+
+    // Snowflakes animation
+    function generateSnowflakes() {
+      for (let i = 0; i < 100; i++) {
+        const snowflake = document.createElement('div');
+        snowflake.classList.add('snowflake');
+        snowflake.textContent = '❄';
+        snowflake.style.left = `${Math.random() * 100}vw`;
+        snowflake.style.animationDuration = `${Math.random() * 3 + 2}s`;
+        snowflake.style.fontSize = `${Math.random() * 10 + 10}px`;
+        document.body.appendChild(snowflake);
+      }
+    }
+
+    generateSnowflakes();
   </script>
 </body>
 </html>
