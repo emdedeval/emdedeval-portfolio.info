@@ -41,10 +41,17 @@
 
     body.dark-mode .section h2, 
     body.dark-mode .section p, 
-    body.dark-mode .section ul li {
-      color: #ffffff;
+    body.dark-mode .section ul li,
+    body.dark-mode .header h1, 
+    body.dark-mode .header h2 {
+      color: #ffffff; /* Ensure text in all sections is white */
     }
 
+    body.dark-mode a {
+      color: #ffcc00; /* Gold color for links in dark mode */
+    }
+
+    /* Dark mode toggle button */
     .dark-mode-toggle {
       position: fixed;
       top: 20px;
@@ -56,6 +63,7 @@
       border-radius: 5px;
       cursor: pointer;
     }
+
   </style>
 </head>
 <body>
