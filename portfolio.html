@@ -4,67 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Orchestrating Brilliance: A Journey Through Innovation</title>
+  <link rel="stylesheet" href="style.css">
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to bottom, #1e3c72, #2a5298);
-      color: white;
-      overflow-x: hidden;
-    }
-
-    .container {
-      padding: 20px;
-      text-align: center;
-    }
-
-    .header h1, .header h2 {
-      margin: 10px 0;
-    }
-
-    .section {
-      margin: 20px 0;
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.5);
-      border-radius: 10px;
-    }
-
-    a {
-      color: #1abc9c;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .flags img {
-      width: 50px;
-      margin: 5px;
-    }
-
-    .countdown {
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
-
-    #quote {
-      margin-top: 20px;
-      font-style: italic;
-      font-size: 1.2rem;
-    }
-
-    #current-time {
-      margin-top: 10px;
-    }
-
     /* Snowflake styles */
     .snowflake {
       position: absolute;
       top: -10px;
       color: white;
       user-select: none;
-      z-index: 0;
+      z-index: 0; /* Ensure snowflakes are behind the content */
       animation: fall linear infinite;
     }
 
@@ -74,23 +22,15 @@
       }
     }
 
-    /* Responsive design */
-    @media (max-width: 600px) {
-      .header h1 {
-        font-size: 1.8rem;
-      }
-
-      .header h2 {
-        font-size: 1.2rem;
-      }
-
-      .countdown {
-        font-size: 1.2rem;
-      }
-
-      #quote {
-        font-size: 1rem;
-      }
+    /* Countdown styles */
+    .countdown {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 24px;
+      color: #ffffff;
+      background: #333;
+      padding: 10px;
+      border-radius: 8px;
     }
   </style>
 </head>
@@ -100,43 +40,57 @@
       <h1>Valentin D. Mengue Ebengue</h1>
       <h2>AWS Cloud Engineer / DevOps Engineer</h2>
     </header>
-
-    <main>
+    <main class="main">
       <section class="section">
         <h2>The Dawn of My Path to Innovation</h2>
-        <p>In a career spanning over a decade, I've danced between the clouds and code...</p>
+        <p>In a career spanning over a decade, I've danced between the clouds and code, crafting avant-garde software solutions that merge creativity and functionality. Whether working solo or leading a team, I orchestrate seamless communication, turning diverse expertise into symphonies of innovation. My role? Not just to contribute, but to lead with brilliance, shaping success from the ordinary.</p>
       </section>
-
       <section class="section">
         <h2>The Detailed Resume or Curriculum Vitae</h2>
-        <a href="https://s3.amazonaws.com/emdedeval-portfolio.info/C.V.ResumeV.3.docx" target="_blank">Step into My World</a>
+        <a href="https://s3.amazonaws.com/emdedeval-portfolio.info/C.V.ResumeV.3.docx">Step into My World</a>
       </section>
-
       <section class="section">
         <h2>The Project Display</h2>
-        <a href="https://s3.amazonaws.com/emdedeval-portfolio.info/my_portfolio.html" target="_blank">Marvel at My Creations</a>
+        <a href="https://s3.amazonaws.com/emdedeval-portfolio.info/my_portfolio.html">Marvel at My Creations</a>
+      </section>
+      <section class="section fun-facts">
+        <h2>Did You Know?</h2>
+        <ul id="fun-facts-list">
+          <li>I once debugged code while hiking, and the solution came with the mountain breeze!</li>
+          <li>I've been known to binge-watch sci-fi series for "inspiration". My top pick? Blade Runner.</li>
+          <li>My Rubik's Cube completion time is a record-breaking under 2 minutes!</li>
+        </ul>
+      </section>
+      <section class="section hobbies">
+        <h2>Where Creativity and Relaxation Collide</h2>
+        <p>When my keyboard rests, my spirit soars in these endeavors:</p>
+        <ul>
+          <li>Embarking on adrenaline-packed mountain hikes with "NSŌ-FA CLUB"</li>
+          <li>Composing melodies on my guitar, a fusion of sound and code</li>
+          <li>Experimenting with exotic cuisine, especially my signature dish, "Okok"</li>
+        </ul>
       </section>
 
+      <!-- New Year Countdown Section -->
       <section class="section countdown">
         <h2>Countdown to New Year</h2>
         <div id="new-year-countdown">Loading countdown...</div>
       </section>
 
-      <section class="section">
+      <!-- Weather Section -->
+      <section class="section weather">
         <h2>Today's Weather</h2>
         <div id="weather-data">Loading weather...</div>
       </section>
 
       <div class="flags">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Flag_of_Cameroon.svg" alt="Cameroon Flag">
-        <img src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg" alt="USA Flag">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Flag_of_Cameroon.svg" alt="Cameroon Flag" class="flag">
+        <img src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg" alt="USA Flag" class="flag">
       </div>
-
-      <div id="quote">Loading quote...</div>
-      <div id="current-time">Loading time...</div>
+      <div class="time" id="current-time"></div>
+      <div class="quote" id="quote"></div>
     </main>
-
-    <footer>
+    <footer class="footer">
       <p>&copy; 2024 Valentin Desire Mengue Ebengue — Crafting Innovation, One Line of Code at a Time</p>
     </footer>
   </div>
@@ -156,41 +110,88 @@
 
       const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
       const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+      const minutes = Math.floor((timeDiff % (1000 * 60)) / (1000 * 60));
       const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
 
       document.getElementById('new-year-countdown').textContent =
         `${days}d ${hours}h ${minutes}m ${seconds}s`;
     }
 
+    // Update countdown every second
     setInterval(updateCountdown, 1000);
-    updateCountdown();
+    updateCountdown(); // Initial call to display immediately
 
-    // Quotes
+    // Weather and other existing features (truncated for brevity)
+    const apiKey = '622c76c7e9afcdc37741c19a5917c3ef';
+    function getCity() {
+      return fetch('https://ipinfo.io/json?token=271160051bbd26')
+        .then(response => response.json())
+        .then(data => fetchWeather(data.city))
+        .catch(error => console.error('Error fetching IP info:', error));
+    }
+
+    function fetchWeather(city) {
+      const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+          if (data.cod === 200) {
+            document.getElementById('weather-data').innerHTML = `
+              <p>Weather in ${city}:</p>
+              <p>${data.weather[0].description}</p>
+              <p>Temperature: ${data.main.temp}°C</p>
+              <p>Humidity: ${data.main.humidity}%</p>
+              <p>Wind Speed: ${data.wind.speed} m/s</p>`;
+          }
+        })
+        .catch(error => console.error('Error fetching weather data:', error));
+    }
+
+    getCity();
+
+    // Quotes and time display
     const quotes = [
-      "I'm not arguing, I'm just passionately clarifying my brilliance.",
-      "Life’s a loop, and I’m breaking out with every line of code.",
-      "My keyboard and I? We’re a love story written in binary.",
-      "Coding is just art with a semicolon at the end of every masterpiece."
-    ];
+   "I'm not arguing, I'm just passionately clarifying my brilliance.",
+   "I follow a seafood diet: I see food, I innovate.",
+   "My computer knows me so well, it even sends Kit-Kats when I need a break!",
+   "Atoms, they make up everything... including my witty code.",
+   "Reading a book on anti-gravity? I simply can't put it down.",
+   "La vie est un code, et je suis le programmeur. - Valentin",
+   "Quand on code, on réinvente l'univers. - Valentin",
+   "L'innovation ne dort jamais, tout comme moi pendant une deadline. - Valentin",
+   "Coding is my cardio—every bug fixed is a heartbeat restored.",
+   "I don’t procrastinate; I just compile ideas in the background.",
+   "Life’s a loop, and I’m breaking out with every line of code.",
+   "My keyboard and I? We’re a love story written in binary.",
+   "Debugging is like being a detective in a crime movie where you are also the villain.",
+   "I code, therefore I am. Simple as an `if-else` statement.",
+   "Clouds aren’t just in the sky—they’re in my architecture too.",
+   "I’ve got 99 problems, but an infinite loop ain’t one (anymore).",
+   "Code like a poet, debug like a surgeon.",
+   "The only drama I allow in my life is a stack trace.",
+   "Why rest when you can REST API? Efficiency is my middle name.",
+   "CTRL + Z is the closest thing we have to a time machine.",
+   "Coding is just art with a semicolon at the end of every masterpiece.",
+   "If my life were a commit, it would say: 'Refactored my priorities.'",
+   "Remember, there are no errors, just unexpected features.",
+   "In the world of code, I’m the one who calls the shots."
+];
 
     function updateQuote() {
       const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
       document.getElementById('quote').textContent = `"${randomQuote}"`;
     }
 
-    setInterval(updateQuote, 5000);
-    updateQuote();
-
-    // Current Time
     function updateTime() {
       document.getElementById('current-time').textContent = `Current Time: ${new Date().toLocaleTimeString()}`;
     }
 
+    setInterval(updateQuote, 5000);
     setInterval(updateTime, 1000);
+    updateQuote();
     updateTime();
 
-    // Snowflakes Animation
+    // Snowflakes animation
     function generateSnowflakes() {
       for (let i = 0; i < 100; i++) {
         const snowflake = document.createElement('div');
