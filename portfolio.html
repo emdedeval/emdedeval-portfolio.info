@@ -44,11 +44,15 @@
     body.dark-mode .section ul li,
     body.dark-mode .header h1, 
     body.dark-mode .header h2 {
-      color: #ffffff; /* Ensure text in all sections is white */
+      color: #ffffff !important; /* Ensure text in all sections is white */
     }
 
     body.dark-mode a {
-      color: #ffcc00; /* Gold color for links in dark mode */
+      color: #ffcc00 !important; /* Gold color for links in dark mode */
+    }
+
+    body.dark-mode .footer p {
+      color: #ffffff !important; /* Ensure footer text is visible in dark mode */
     }
 
     /* Dark mode toggle button */
@@ -64,6 +68,19 @@
       cursor: pointer;
     }
 
+    /* Additional styling for body and content in light mode */
+    body {
+      background-color: #fff;
+      color: #333;
+    }
+
+    .header h1, .header h2, .section h2, .section p, .section ul li, .footer p {
+      color: #333;
+    }
+
+    a {
+      color: #1e90ff;
+    }
   </style>
 </head>
 <body>
