@@ -24,9 +24,9 @@
     }
 
     .container {
-      max-width: 1100px;
-      margin: 30px auto;
-      padding: 40px;
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 20px;
       background: rgba(255, 255, 255, 0.1);
       border-radius: 12px;
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
@@ -59,18 +59,26 @@
       line-height: 1.8;
     }
 
-    /* Portfolio item styles */
+    /* Portfolio grid styles */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
     .portfolio-item {
-      margin-bottom: 40px;
       text-align: center;
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
     }
 
     .portfolio-item img {
       width: 100%;
-      max-width: 600px;
       height: auto;
       border-radius: 12px;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
       transition: transform 0.3s ease;
     }
@@ -88,7 +96,6 @@
     .portfolio-item p {
       font-size: 1.1rem;
       color: #ddd;
-      margin-bottom: 15px;
     }
 
     /* Contact section styles */
@@ -133,10 +140,6 @@
         font-size: 2rem;
       }
 
-      .portfolio-item h3 {
-        font-size: 1.5rem;
-      }
-
       .contact h2 {
         font-size: 1.8rem;
       }
@@ -164,16 +167,18 @@
     <!-- Projects section -->
     <div class="section">
       <h2>Projects</h2>
-      <div class="portfolio-item">
-        <img src="CICD.jpg" alt="CI/CD Pipeline Project Image">
-        <h3>GitHub Monorepo Integration with AWS CodePipeline</h3>
-        <p>This project automates release processes for a GitHub monorepo using AWS CodePipeline, enhancing CI/CD workflows and streamlining delivery.</p>
-      </div>
+      <div class="portfolio-grid">
+        <div class="portfolio-item">
+          <img src="CICD.jpg" alt="CI/CD Pipeline Project Image">
+          <h3>GitHub Monorepo Integration with AWS CodePipeline</h3>
+          <p>This project automates release processes for a GitHub monorepo using AWS CodePipeline, enhancing CI/CD workflows and streamlining delivery.</p>
+        </div>
 
-      <div class="portfolio-item">
-        <img src="Migration.jpg" alt="Migration Project Image">
-        <h3>Seamless Migration of On-Premises Workloads with AWS Application Migration Service</h3>
-        <p>Showcasing the migration of on-premises workloads to AWS using the Application Migration Service, this project reduces cost and complexity.</p>
+        <div class="portfolio-item">
+          <img src="Migration.jpg" alt="Migration Project Image">
+          <h3>Seamless Migration of On-Premises Workloads with AWS Application Migration Service</h3>
+          <p>Showcasing the migration of on-premises workloads to AWS using the Application Migration Service, this project reduces cost and complexity.</p>
+        </div>
       </div>
     </div>
 
