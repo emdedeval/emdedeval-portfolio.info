@@ -3,46 +3,70 @@ name: Deploy Static Site to S3
 on:
   push:
     branches:
-      - main  # Change this to your default branch if it's not "main"
+      - main  # Adjust this to your default branch if it's not "main"
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout code
       - name: Checkout code
-        uses: actions/checkout@v3  # Using the latest version of the checkout action
+        uses: actions/checkout@v3
 
+      # Step 2: Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'  # Set to Node.js version 20
+          node-version: '20'
 
+      # Step 3: Install Snyk CLI
       - name: Install Snyk CLI
-        run: npm install -g snyk  # Install Snyk globally to check for vulnerabilities
+        run: npm install -g snyk
 
-      # Uncomment this step to run Snyk vulnerability tests (make sure SNYK_TOKEN is added in your GitHub secrets)
+      # Step 4: (Optional) Run Snyk vulnerability tests
+      # Uncomment this section if you want to enable Snyk tests
       # - name: Test for vulnerabilities with Snyk
       #   run: snyk test
       #   env:
       #     SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
+      # Step 5: Configure AWS credentials
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2  # Updated to use v2
+        uses: aws-actions/configure-aws-credentials@v2
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}  # Set AWS credentials from secrets
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}  # Set AWS region from secrets
+          aws-region: ${{ secrets.AWS_REGION }}
 
+      # Step 6: Deploy to S3
       - name: Deploy to S3
         run: |
-          aws s3 sync . s3://${{ secrets.AWS_S3_BUCKET }} --exclude '.git/*' --delete  # Sync files to S3 and exclude Git files
+          echo "Starting S3 deployment..." > deployment.log
+          aws s3 sync . s3://${{ secrets.AWS_S3_BUCKET }} --exclude '.git/*' --delete >> deployment.log 2>&1
+          echo "S3 deployment completed successfully." >> deployment.log
 
+      # Step 7: Invalidate CloudFront Cache
       - name: Invalidate CloudFront Cache
-        if: github.ref == 'refs/heads/main'  # Invalidate cache only when pushing to main
+        if: github.ref == 'refs/heads/main'
         run: |
-          aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
+          echo "Invalidating CloudFront cache..." >> deployment.log
+          aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*" >> deployment.log 2>&1
+          echo "CloudFront cache invalidation completed." >> deployment.log
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}  # Set AWS access key
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}  # Set AWS secret key
-          AWS_REGION: ${{ secrets.AWS_REGION }}  # Set AWS region
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+
+      # Step 8: Debug Log Creation
+      - name: Debug Log Creation
+        run: |
+          echo "Checking if deployment.log exists..."
+          ls -l deployment.log || echo "File not found!"
+
+      # Step 9: Upload Deployment Logs
+      - name: Upload Deployment Logs
+        uses: actions/upload-artifact@v3
+        with:
+          name: Deployment Logs
+          path: deployment.log
